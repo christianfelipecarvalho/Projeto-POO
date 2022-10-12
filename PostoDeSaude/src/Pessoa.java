@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Pessoa {
     private Integer codigo;
     private String nome;
@@ -7,6 +9,24 @@ public class Pessoa {
     private String rua;
     private String pais;
     private String bairro;
+    private LocalDate dataNascimento;
+    private String telefone;
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public Integer getCodigo() {
         return codigo;

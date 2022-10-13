@@ -3,5 +3,6 @@ public class Funcionario extends Pessoa{
     private String setor;
     private String emailCorporativo;
     private Integer matricula;
+    private String conselho;
 
 }

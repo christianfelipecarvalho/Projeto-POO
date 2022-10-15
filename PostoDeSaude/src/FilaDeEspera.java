@@ -1,2 +1,7 @@
-public class FilaDeEspera {
+public class FilaDeEspera enum level{
+    MUITOURGENTE,
+        URGENTE,
+        POUCOURGENTE,
+            NAOURGENTE
+
 }

@@ -12,6 +12,18 @@ public class Pessoa {
     private LocalDate dataNascimento;
     private String telefone;
 
+//    public Pessoa(Integer codigo, String nome, String cpf, String rg, char uf, String rua, String pais, String bairro, LocalDate dataNascimento, String telefone) {
+//        this.codigo = codigo;
+//        this.nome = nome;
+//        this.cpf = cpf;
+//        this.rg = rg;
+//        this.uf = uf;
+//        this.rua = rua;
+//        this.pais = pais;
+//        this.bairro = bairro;
+//        this.dataNascimento = dataNascimento;
+//        this.telefone = telefone;
+//    }
 
     public LocalDate getDataNascimento() {
         return dataNascimento;

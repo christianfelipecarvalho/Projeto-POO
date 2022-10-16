@@ -46,7 +46,7 @@ public class Main {
                 Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
                         "MENU", 3, null, cadastroPaciente, "");
                 if (selecao.equals("Nome")) {
-                    String nome = JOptionPane.showInputDialog("Escreva o nome do paciente");
+                    String nome = JOptionPane.showInputDialog("Escreva o nome do paciente:");
                     paciente.setNome(nome);
                     System.out.println(paciente.getNome());
 

@@ -1,5 +1,5 @@
 public enum FilaDeEspera{
-
+        FILATRIAGEM("Fila triagem"),
         MUITOURGENTE("Muito Urgente"),
         URGENTE("Urgente"),
         POUCOURGENTE("Pouco Urgente"),

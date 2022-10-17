@@ -15,6 +15,11 @@ public class Main {
         recepcionista.setNome("Ana");
         recepcionista.setCpf("578.656.999-80");
 
+        Funcionario recepcionista2 = new Funcionario();
+        recepcionista2.setMatricula(2);
+        recepcionista2.setCargo("Recepcionista");
+
+
         Funcionario enfermeiro = new Funcionario();
         enfermeiro.setCargo("Enfermeiro");
         enfermeiro.setSetor("Triagem");
@@ -32,7 +37,21 @@ public class Main {
         medico.setEspecialidades("Ortopedista");
 
 
-            Object[] opcaoInicial = {recepcionista.getCargo(),enfermeiro.getCargo(),medico.getCargo()};
+        List<String> cargos = new ArrayList<>();
+
+        cargos.add("Recepcionista");
+        cargos.add("Enfermeiro");
+        cargos.add("Medico");
+
+        /*List<String> matricula = new ArrayList<>();
+        matricula.add('');
+        for(int i = 0; i <= matricula.size(); i++){
+            matricula.
+        }
+
+
+         */
+            Object[] opcaoInicial = cargos.toArray();//{recepcionista.getCargo(),enfermeiro.getCargo(),medico.getCargo()};
 
 
          Object selecionado = JOptionPane.showInputDialog(null, "Selecione qual sistema você quer acessar:",
@@ -54,8 +73,6 @@ public class Main {
                     Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
                             "MENU", 3, null, cadastroPaciente2, "");
                 }
-            }else{
-                return;
             }
 
 

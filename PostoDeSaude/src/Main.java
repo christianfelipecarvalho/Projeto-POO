@@ -3,20 +3,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+
+        List<Funcionario> funcionarios = new ArrayList<>();
+
 
         Funcionario recepcionista = new Funcionario();
         recepcionista.setCargo("Recepcionista");
         recepcionista.setSetor("Recepção");
         recepcionista.setConselho("");
-        recepcionista.setMatricula(1);
+        recepcionista.setMatricula(1000);
         recepcionista.setNome("Ana");
         recepcionista.setCpf("578.656.999-80");
 
+        funcionarios.add(recepcionista);
+
         Funcionario recepcionista2 = new Funcionario();
-        recepcionista2.setMatricula(2);
+        recepcionista2.setMatricula(1002);
         recepcionista2.setCargo("Recepcionista");
 
 
@@ -24,67 +30,101 @@ public class Main {
         enfermeiro.setCargo("Enfermeiro");
         enfermeiro.setSetor("Triagem");
         enfermeiro.setConselho("coren");
-        enfermeiro.setMatricula(2);
+        enfermeiro.setMatricula(23434);
         enfermeiro.setNome("Paula");
         enfermeiro.setCpf("777.872.247-30");
+
+        funcionarios.add(enfermeiro);
 
         Medico medico = new Medico();
         medico.setCargo("Medico");
         medico.setSetor("Consultorio");
         medico.setConselho("crm");
-        medico.setMatricula(3);
+        medico.setMatricula(3001);
         medico.setNome("João");
         medico.setEspecialidades("Ortopedista");
 
+        funcionarios.add(medico);
 
-        List<String> cargos = new ArrayList<>();
 
-        cargos.add("Recepcionista");
-        cargos.add("Enfermeiro");
-        cargos.add("Medico");
+        List<String> cargos = new ArrayList<>();//funcionarios.stream().map(f -> f.getCargo()).collect(Collectors.toList());
 
-        /*List<String> matricula = new ArrayList<>();
-        matricula.add('');
-        for(int i = 0; i <= matricula.size(); i++){
-            matricula.
+        for (Funcionario funcionario : funcionarios) {
+            cargos.add(funcionario.getCargo());
         }
 
 
-         */
-            Object[] opcaoInicial = cargos.toArray();//{recepcionista.getCargo(),enfermeiro.getCargo(),medico.getCargo()};
+        List<String> matriculaGeral = new ArrayList<>();
+
+        for (Funcionario funcionarioMatricula : funcionarios) {
+            matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
+        }
 
 
-         Object selecionado = JOptionPane.showInputDialog(null, "Selecione qual sistema você quer acessar:",
-                 "MENU", 3,null, opcaoInicial,"");
+        Object[] confirmacaoMatricula = matriculaGeral.toArray();
 
-         if (selecionado.equals(recepcionista.getCargo())){
-             String confirmacao = JOptionPane.showInputDialog(null,"Você selecionou Recepcionista? Digite o codigo da matricula:");
-            if(Integer.valueOf(confirmacao).equals(recepcionista.getMatricula())) {
-                Paciente paciente = new Paciente();
-                String[] cadastroPaciente = {"Nome", "CPF", "RG", "Cartão do SUS"};
-                Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
-                        "MENU", 3, null, cadastroPaciente, "");
-                if (selecao.equals("Nome")) {
-                    String nome = JOptionPane.showInputDialog("Escreva o nome do paciente:");
-                    paciente.setNome(nome);
-                    System.out.println(paciente.getNome());
+        Object[] opcaoInicial = cargos.toArray();//{recepcionista.getCargo(),enfermeiro.getCargo(),medico.getCargo()};
 
-                    String[] cadastroPaciente2 = { "CPF", "RG", "Cartão do SUS"};
-                    Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
-                            "MENU", 3, null, cadastroPaciente2, "");
-                }
+        Object selecionado = JOptionPane.showInputDialog(null, "Selecione qual sistema você quer acessar:",
+                "MENU", 1, null, opcaoInicial, "");
+
+        List<String> nova = new ArrayList<>();
+        for (Funcionario funcionarioMatricula : funcionarios) {
+            nova.add(funcionarioMatricula.getMatricula().toString().substring(0, 1));
+        }
+
+        System.out.println("> " + nova);
+
+        Object[] aux = new Object[1];
+        int i = 0;
+        for (Object obj : confirmacaoMatricula) {
+            System.out.println(">>>>"+(String)obj.toString().substring(0, 1));
+            if (Integer.valueOf(obj.toString().substring(0, 1)) == 1) {
+                aux[i] = obj;
             }
+        }
+        System.out.println(">>"+ aux);
+        System.out.println(">>"+ aux.length);
+
+        if (selecionado.equals(cargos.get(0)) && nova.contains("1")) {
+            String confirmacao = (String) JOptionPane.showInputDialog(null,
+                    "Você selecionou Recepcionista? Digite o codigo da matricula:", "Confirmação", 1,
+                    null, aux, " ");
 
 
-         }else if(selecionado.equals(enfermeiro.getCargo())){
-             JOptionPane.showConfirmDialog(null,"Você selecionou Enfermeiro?");
+            Paciente paciente = new Paciente();
+            String[] cadastroPaciente = {"Nome", "CPF", "RG", "Cartão do SUS"};
+            Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
+                    "MENU", 3, null, cadastroPaciente, "");
+            if (selecao.equals("Nome")) {
+                String nome = JOptionPane.showInputDialog("Escreva o nome do paciente:");
+                paciente.setNome(nome);
+                System.out.println(paciente.getNome());
 
-         }
-         else if (selecionado.equals(medico.getCargo())){
-             JOptionPane.showConfirmDialog(null,"Você selecionou Médico?");
+                String[] cadastroPaciente2 = {"CPF", "RG", "Cartão do SUS"};
+                Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
+                        "MENU", 3, null, cadastroPaciente2, "");
+            }
+        }
+        if (selecionado.equals(cargos.get(1))) {
+            String confirmacao1 = (String) JOptionPane.showInputDialog(null,
+                    "Você selecionou Enfermeiro? Digite o codigo da matricula:", "Confirmação", 1,
+                    null, confirmacaoMatricula, " ");
 
-         }
+
+//                 Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
+//                         "MENU", 3, null, cadastroPaciente, "");
+//                 if (selecao.equals("Nome")) {
+//                     String nome = JOptionPane.showInputDialog("Escreva o nome do paciente:");
+//                     paciente.setNome(nome);
+//                     System.out.println(paciente.getNome());
+//
+//                     String[] cadastroPaciente2 = { "CPF", "RG", "Cartão do SUS"};
+//                     Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
+//                             "MENU", 3, null, cadastroPaciente2, "");
+        }
 
     }
-
 }
+
+

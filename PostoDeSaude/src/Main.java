@@ -1,33 +1,33 @@
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
 
         List<Funcionario> funcionarios = new ArrayList<>();
 
-
         Funcionario recepcionista = new Funcionario();
-        recepcionista.setCargo("Recepcionista");
+        recepcionista.setCargo(String.valueOf(Funcionario.CargosFuncionarios.RECEPCIONISTA));
         recepcionista.setSetor("Recepção");
         recepcionista.setConselho("");
         recepcionista.setMatricula(1000);
         recepcionista.setNome("Ana");
         recepcionista.setCpf("578.656.999-80");
-
+        recepcionista.getCargo();
         funcionarios.add(recepcionista);
 
         Funcionario recepcionista2 = new Funcionario();
         recepcionista2.setMatricula(1002);
-        recepcionista2.setCargo("Recepcionista");
+        recepcionista2.setCargo(String.valueOf(Funcionario.CargosFuncionarios.RECEPCIONISTA));
+        funcionarios.add(recepcionista2);
 
-
+        Funcionario recepcionista3 = new Funcionario();
+        recepcionista3.setMatricula(1003);
+        recepcionista3.setCargo(String.valueOf(Funcionario.CargosFuncionarios.RECEPCIONISTA));
+        funcionarios.add(recepcionista3);
         Funcionario enfermeiro = new Funcionario();
-        enfermeiro.setCargo("Enfermeiro");
+        enfermeiro.setCargo(String.valueOf(Funcionario.CargosFuncionarios.ENFERMEIRO));
         enfermeiro.setSetor("Triagem");
         enfermeiro.setConselho("coren");
         enfermeiro.setMatricula(23434);
@@ -37,7 +37,7 @@ public class Main {
         funcionarios.add(enfermeiro);
 
         Medico medico = new Medico();
-        medico.setCargo("Medico");
+        medico.setCargo(String.valueOf(Funcionario.CargosFuncionarios.MEDICO));
         medico.setSetor("Consultorio");
         medico.setConselho("crm");
         medico.setMatricula(3001);
@@ -51,8 +51,8 @@ public class Main {
 
         for (Funcionario funcionario : funcionarios) {
             cargos.add(funcionario.getCargo());
-        }
 
+        }
 
         List<String> matriculaGeral = new ArrayList<>();
 
@@ -61,35 +61,18 @@ public class Main {
         }
 
 
-        Object[] confirmacaoMatricula = matriculaGeral.toArray();
+        //Object[] confirmacaoMatricula = matriculaGeral.toArray();
 
-        Object[] opcaoInicial = cargos.toArray();//{recepcionista.getCargo(),enfermeiro.getCargo(),medico.getCargo()};
+        Object[] opcaoInicial = {recepcionista.getCargo(),enfermeiro.getCargo(),medico.getCargo()};
 
         Object selecionado = JOptionPane.showInputDialog(null, "Selecione qual sistema você quer acessar:",
                 "MENU", 1, null, opcaoInicial, "");
 
-        List<String> nova = new ArrayList<>();
-        for (Funcionario funcionarioMatricula : funcionarios) {
-            nova.add(funcionarioMatricula.getMatricula().toString().substring(0, 1));
-        }
-
-        System.out.println("> " + nova);
-
-        Object[] aux = new Object[1];
-        int i = 0;
-        for (Object obj : confirmacaoMatricula) {
-            System.out.println(">>>>"+(String)obj.toString().substring(0, 1));
-            if (Integer.valueOf(obj.toString().substring(0, 1)) == 1) {
-                aux[i] = obj;
-            }
-        }
-        System.out.println(">>"+ aux);
-        System.out.println(">>"+ aux.length);
-
-        if (selecionado.equals(cargos.get(0)) && nova.contains("1")) {
-            String confirmacao = (String) JOptionPane.showInputDialog(null,
+        if (selecionado.equals(cargos.get(0))) {
+            Object [] recepcionistaMatricula = {recepcionista.getMatricula(),recepcionista2.getMatricula(),recepcionista3.getMatricula()};
+            Object confirmacao = JOptionPane.showInputDialog(null,
                     "Você selecionou Recepcionista? Digite o codigo da matricula:", "Confirmação", 1,
-                    null, aux, " ");
+                    null, recepcionistaMatricula, " ");
 
 
             Paciente paciente = new Paciente();
@@ -106,11 +89,12 @@ public class Main {
                         "MENU", 3, null, cadastroPaciente2, "");
             }
         }
-        if (selecionado.equals(cargos.get(1))) {
-            String confirmacao1 = (String) JOptionPane.showInputDialog(null,
-                    "Você selecionou Enfermeiro? Digite o codigo da matricula:", "Confirmação", 1,
-                    null, confirmacaoMatricula, " ");
-
+//        if (selecionado.equals(cargos.get(1))) {
+//
+//            String confirmacao1 = (String) JOptionPane.showInputDialog(null,
+//                    "Você selecionou Enfermeiro? Digite o codigo da matricula:", "Confirmação", 1,
+//                    null, confirmacaoMatricula, " ");
+//
 
 //                 Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
 //                         "MENU", 3, null, cadastroPaciente, "");
@@ -122,9 +106,9 @@ public class Main {
 //                     String[] cadastroPaciente2 = { "CPF", "RG", "Cartão do SUS"};
 //                     Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
 //                             "MENU", 3, null, cadastroPaciente2, "");
-        }
+       }
 
     }
-}
+
 
 

@@ -5,6 +5,12 @@ public class Funcionario extends Pessoa{
     private Integer matricula;
     private String conselho;
 
+    public  enum CargosFuncionarios{
+        RECEPCIONISTA,
+        ENFERMEIRO,
+        MEDICO;
+    }
+
 
     public String getCargo() {
         return cargo;

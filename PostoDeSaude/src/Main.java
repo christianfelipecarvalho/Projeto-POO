@@ -87,6 +87,7 @@ public class Main {
                 String[] cadastroPaciente2 = {"CPF", "RG", "Cartão do SUS"};
                 Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
                         "MENU", 3, null, cadastroPaciente2, "");
+
             }
         }
 //        if (selecionado.equals(cargos.get(1))) {

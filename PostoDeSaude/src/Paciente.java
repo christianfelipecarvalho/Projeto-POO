@@ -1,9 +1,9 @@
 import java.time.LocalDate;
 
 public class Paciente extends Pessoa{
-    private Integer cartaoSus;
+    private String cartaoSus;
 
-    public Integer getCartaoSus() {
+    public String getCartaoSus() {
         return cartaoSus;
     }
 
@@ -12,7 +12,9 @@ public class Paciente extends Pessoa{
 //        this.cartaoSus = cartaoSus;
 //    }
 
-    public void setCartaoSus(Integer cartaoSus) {
+    public void setCartaoSus(String cartaoSus) {
         this.cartaoSus = cartaoSus;
     }
+
+
 }

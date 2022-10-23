@@ -77,19 +77,63 @@ public class Main {
 
             Paciente paciente = new Paciente();
             String[] cadastroPaciente = {"Nome", "CPF", "RG", "Cartão do SUS"};
+            String[] cadastroPaciente2 = {"CPF", "RG", "Cartão do SUS"};
+            String[] cadastroPaciente3 = {"RG","Cartão do SUS"};
+            String[] cadastroPaciente4 = {"Cartão do SUS"};
+
+
             Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
                     "MENU", 3, null, cadastroPaciente, "");
+
+
             if (selecao.equals("Nome")) {
                 String nome = JOptionPane.showInputDialog("Escreva o nome do paciente:");
                 paciente.setNome(nome);
                 System.out.println(paciente.getNome());
 
-                String[] cadastroPaciente2 = {"CPF", "RG", "Cartão do SUS"};
-                Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
-                        "MENU", 3, null, cadastroPaciente2, "");
-
             }
-        }
+
+
+                Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
+                        "MENU", 3, null, cadastroPaciente, "");
+
+                if(selecao2.equals("CPF")) {
+                    String cpf = JOptionPane.showInputDialog("Digite o CPF do paciente:");
+                    paciente.setCpf(cpf);
+                    System.out.println(paciente.getCpf());
+                }
+
+                    Object selecao3 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
+                            "MENU",3,null,cadastroPaciente,"");
+
+                    if(selecao3.equals("RG")) {
+                        String rg = JOptionPane.showInputDialog("Digite o RG do paciente:");
+                        paciente.setRg(rg);
+                        System.out.println(paciente.getRg());
+
+                    }
+
+                     Object selecao4 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
+                                "MENU",3,null,cadastroPaciente,"");
+
+                     if(selecao4.equals("Cartão do SUS")){
+                         String cartaoSUS = JOptionPane.showInputDialog("Digite o cartão do SUS do paciente:");
+                         paciente.setCartaoSus(cartaoSUS);
+                         System.out.println(paciente.getCartaoSus());
+                     }
+
+
+                    }
+
+                }
+
+                }
+
+
+
+
+
+
 //        if (selecionado.equals(cargos.get(1))) {
 //
 //            String confirmacao1 = (String) JOptionPane.showInputDialog(null,
@@ -107,9 +151,9 @@ public class Main {
 //                     String[] cadastroPaciente2 = { "CPF", "RG", "Cartão do SUS"};
 //                     Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
 //                             "MENU", 3, null, cadastroPaciente2, "");
-       }
 
-    }
+
+
 
 
 

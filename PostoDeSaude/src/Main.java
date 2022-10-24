@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,15 +45,12 @@ public class Main {
         medico.setMatricula(3001);
         medico.setNome("João");
         medico.setEspecialidades("Ortopedista");
-
         funcionarios.add(medico);
-
 
         List<String> cargos = new ArrayList<>();//funcionarios.stream().map(f -> f.getCargo()).collect(Collectors.toList());
 
         for (Funcionario funcionario : funcionarios) {
             cargos.add(funcionario.getCargo());
-
         }
 
         List<String> matriculaGeral = new ArrayList<>();
@@ -60,55 +59,143 @@ public class Main {
             matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
         }
 
+        ///TROCAR PARA SWITCH PARA TRATAR A ENTRADA MELHOR
 
-        //Object[] confirmacaoMatricula = matriculaGeral.toArray();
+//        int tipoSistema = 0;
+//        if (menuOpcaoSistemas().toString().equals("RECEPCIONISTA")){
+//            tipoSistema = 0;
+//        } else if (menuOpcaoSistemas().toString().equals("ENFERMEIRO")) {
+//            tipoSistema = 1;
+//        } else if (menuOpcaoSistemas().toString().equals("MEDICO")) {
+//            tipoSistema = 2;
+//        }
+//
+//        switch (tipoSistema){
+//            case 0:
+//                System.out.println("teste");
+//                break;
+//            case 1:
+//                System.out.println("2");
+//                break;
+//            case 2:
+//                System.out.println("3");
+//            default:
+//                throw new IllegalStateException("Unexpected value: " + tipoSistema);
+//        }
 
-        Object[] opcaoInicial = {recepcionista.getCargo(),enfermeiro.getCargo(),medico.getCargo()};
-
-        Object selecionado = JOptionPane.showInputDialog(null, "Selecione qual sistema você quer acessar:",
-                "MENU", 1, null, opcaoInicial, "");
-
-        if (selecionado.equals(cargos.get(0))) {
-            Object [] recepcionistaMatricula = {recepcionista.getMatricula(),recepcionista2.getMatricula(),recepcionista3.getMatricula()};
+        if (menuOpcaoSistemas().equals(Funcionario.CargosFuncionarios.RECEPCIONISTA)) {
+            Object[] recepcionistaMatricula = {recepcionista.getMatricula(), recepcionista2.getMatricula(), recepcionista3.getMatricula()};
             Object confirmacao = JOptionPane.showInputDialog(null,
-                    "Você selecionou Recepcionista? Digite o codigo da matricula:", "Confirmação", 1,
+                    "Você selecionou Recepcionista? Selecione sua matricula:", "Confirmação", 1,
                     null, recepcionistaMatricula, " ");
 
-
-            Paciente paciente = new Paciente();
-            String[] cadastroPaciente = {"Nome", "CPF", "RG", "Cartão do SUS"};
-            Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
-                    "MENU", 3, null, cadastroPaciente, "");
-            if (selecao.equals("Nome")) {
-                String nome = JOptionPane.showInputDialog("Escreva o nome do paciente:");
+            //String[] cadastroPaciente = {"Nome", "CPF", "RG", "Cartão do SUS"};
+            int confirmacaoCadastroPaciente = JOptionPane.showConfirmDialog(null, "Deseja cadastrar o paciente? ");
+            if (confirmacaoCadastroPaciente == 0){
+                chamaCadastroPacientes();
+            }
+            else if (confirmacaoCadastroPaciente == 1) {
+                // retornar ao menu de opções
+                menuOpcaoSistemas();
+            } else if (confirmacaoCadastroPaciente == 2) {
+                menuOpcaoSistemas();
+            }
+        }
+    }
+    private static void chamaCadastroPacientes () {
+        List<Paciente> pacientes = new ArrayList<>();
+        Paciente paciente = new Paciente();
+        pacientes.add(paciente);
+        String[] opcaoMenuPaciente = {"CODIGO", "NOME", "CPF", "RG", "CARTÃO SUS", "PAIS",
+                "UF", "BAIRRO", "RUA", "TELEFONE", "DATA DE NASCIMENTO", "VOLTAR"};
+        int menuCadastroPaciente = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu Cadastro",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuPaciente, opcaoMenuPaciente[0]);
+        switch (menuCadastroPaciente) {
+            case 0: // ir para codigo
+                String codigo = JOptionPane.showInputDialog("Escreva o CÓDIGO do paciente:");
+                paciente.setCodigo(Integer.parseInt(codigo));
+                System.out.println(paciente.getCodigo());
+                chamaCadastroPacientes();
+                break;
+            case 1:
+                String nome = JOptionPane.showInputDialog("Escreva o NOME do paciente: ");
                 paciente.setNome(nome);
                 System.out.println(paciente.getNome());
+                chamaCadastroPacientes();
+                break;
+            case 2:
+                String cpf = JOptionPane.showInputDialog("Escreva o CPF do paciente:");
+                paciente.setCpf(cpf);
+                System.out.println(paciente.getCpf());
+                chamaCadastroPacientes();
+                break;
+            case 3:
+                String rg = JOptionPane.showInputDialog("Escreva o RG do paciente:");
+                paciente.setRg(rg);
+                System.out.println(paciente.getRg());
+                chamaCadastroPacientes();
+                break;
+            case 4:
+                String cartaoSus = JOptionPane.showInputDialog("Escreva o CARTÃO DO SUS do paciente:");
+                paciente.setCartaoSus(cartaoSus);
+                System.out.println(paciente.getCartaoSus());
+                chamaCadastroPacientes();
+                break;
+            case 5:
+                String pais = JOptionPane.showInputDialog("Escreva o PAIS do paciente:");
+                paciente.setPais(pais);
+                System.out.println(paciente.getPais());
+                chamaCadastroPacientes();
+                break;
+            case 6:
+                String uf = JOptionPane.showInputDialog("Escreva o UF do paciente:");
+                paciente.setUf(uf);
+                System.out.println(paciente.getUf());
+                chamaCadastroPacientes();
+                break;
+            case 7:
+                String bairro = JOptionPane.showInputDialog("Escreva o BAIRRO do paciente:");
+                paciente.setBairro(bairro);
+                System.out.println(paciente.getBairro());
+                chamaCadastroPacientes();
+                break;
+            case 8:
+                String rua = JOptionPane.showInputDialog("Escreva o RUA do paciente:");
+                paciente.setRua(rua);
+                System.out.println(paciente.getRua());
+                chamaCadastroPacientes();
+                break;
+            case 9:
+                String telefone = JOptionPane.showInputDialog("Escreva o TELEFONE do paciente:");
+                paciente.setTelefone(telefone);
+                System.out.println(paciente.getTelefone());
+                chamaCadastroPacientes();
+                break;
+            case 10:
+                String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente:");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/AAAA");
+                String date = formatter.format(dataNacimento);
+                paciente.setDataNascimento(LocalDate.parse(date));
+                System.out.println(paciente.getDataNascimento());
+                chamaCadastroPacientes();
+                break;
+            case 11:
+                menuOpcaoSistemas();
+                break;
 
-                String[] cadastroPaciente2 = {"CPF", "RG", "Cartão do SUS"};
-                Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
-                        "MENU", 3, null, cadastroPaciente2, "");
-            }}
-
-//        if (selecionado.equals(cargos.get(1))) {
-//
-//            String confirmacao1 = (String) JOptionPane.showInputDialog(null,
-//                    "Você selecionou Enfermeiro? Digite o codigo da matricula:", "Confirmação", 1,
-//                    null, confirmacaoMatricula, " ");
-//
-
-//                 Object selecao = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
-//                         "MENU", 3, null, cadastroPaciente, "");
-//                 if (selecao.equals("Nome")) {
-//                     String nome = JOptionPane.showInputDialog("Escreva o nome do paciente:");
-//                     paciente.setNome(nome);
-//                     System.out.println(paciente.getNome());
-//
-//                     String[] cadastroPaciente2 = { "CPF", "RG", "Cartão do SUS"};
-//                     Object selecao2 = JOptionPane.showInputDialog(null, "Selecione o que você deseja cadastrar:",
-//                             "MENU", 3, null, cadastroPaciente2, "");
-       }
-
+        }
     }
+    private static Object menuOpcaoSistemas(){
+        Object[] opcaoInicial = {Funcionario.CargosFuncionarios.RECEPCIONISTA,Funcionario.CargosFuncionarios.ENFERMEIRO,
+        Funcionario.CargosFuncionarios.MEDICO};
+
+        Object selecionado = JOptionPane.showInputDialog(null, "Selecione qual sistema você quer acessar:",
+                "MENU", 1, null, opcaoInicial, " ");
+
+        return selecionado;
+    }
+}
 
 
 

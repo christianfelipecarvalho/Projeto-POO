@@ -10,6 +10,9 @@ public class Funcionario extends Pessoa{
         ENFERMEIRO,
         MEDICO;
     }
+
+
+
     public String getCargo() {
         return cargo;
     }

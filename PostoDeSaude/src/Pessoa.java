@@ -5,7 +5,7 @@ public class Pessoa {
     private String nome;
     private String cpf;
     private String rg;
-    private char uf;
+    private String uf;
     private String rua;
     private String pais;
     private String bairro;
@@ -73,11 +73,11 @@ public class Pessoa {
         this.rg = rg;
     }
 
-    public char getUf() {
+    public String getUf() {
         return uf;
     }
 
-    public void setUf(char uf) {
+    public void setUf(String uf) {
         this.uf = uf;
     }
 

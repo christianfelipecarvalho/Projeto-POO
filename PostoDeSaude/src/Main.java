@@ -21,7 +21,6 @@ public class Main {
             matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
         }
 
-
         if (menuOpcaoSistemas().equals(Funcionario.CargosFuncionarios.RECEPCIONISTA)) {
 
             chamaRecepcionista();

@@ -1,9 +1,17 @@
-public enum FilaDeEspera {
-        FILATRIAGEM,
-        MUITOURGENTE,
-        URGENTE,
-        POUCOURGENTE,
-        NAOURGENTE;
+public class FilaDeEspera {
+       private Paciente paciente;
+
+
+
+    public enum fila{
+                FILATRIAGEM,
+                MUITOURGENTE,
+                URGENTE,
+                POUCOURGENTE,
+                NAOURGENTE;
+        }
+
+
 }
 
 

@@ -18,6 +18,7 @@ public class Main {
         for (Funcionario funcionarioMatricula : FuncionarioDAO.findFuncionarios()) {
             matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
         }
+        System.out.println("teste");
         menuOpcaoSistemas();
 
     }

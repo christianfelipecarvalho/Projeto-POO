@@ -18,9 +18,7 @@ public class Main {
         for (Funcionario funcionarioMatricula : FuncionarioDAO.findFuncionarios()) {
             matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
         }
-
         menuOpcaoSistemas();
-
     }
 
     private static Object menuOpcaoSistemas() {
@@ -81,7 +79,7 @@ public class Main {
         //return chamaConfirmacao();
     }
 
-    private static void chamaCadastroPacientes() {// VER SE VAMOS RETORNAR ALGUMA COISA
+    private static String chamaCadastroPacientes() {// VER SE VAMOS RETORNAR ALGUMA COISA
         List<Paciente> pacientes = new ArrayList<>();
         Paciente paciente = new Paciente();
         pacientes.add(paciente);
@@ -94,69 +92,79 @@ public class Main {
             case 0: // ir para codigo
                 String codigo = JOptionPane.showInputDialog("Escreva o CÓDIGO do paciente:");
                 paciente.setCodigo(Integer.parseInt(codigo));
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 chamaCadastroPacientes();
                 break;
             case 1:
                 String nome = JOptionPane.showInputDialog("Escreva o NOME do paciente: ");
                 paciente.setNome(nome);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getNome());
                 chamaCadastroPacientes();
                 break;
             case 2:
                 String cpf = JOptionPane.showInputDialog("Escreva o CPF do paciente:");
                 paciente.setCpf(cpf);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getCpf());
                 chamaCadastroPacientes();
                 break;
             case 3:
                 String rg = JOptionPane.showInputDialog("Escreva o RG do paciente:");
                 paciente.setRg(rg);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getRg());
                 chamaCadastroPacientes();
                 break;
             case 4:
                 String cartaoSus = JOptionPane.showInputDialog("Escreva o CARTÃO DO SUS do paciente:");
                 paciente.setCartaoSus(cartaoSus);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getCartaoSus());
                 chamaCadastroPacientes();
                 break;
             case 5:
                 String pais = JOptionPane.showInputDialog("Escreva o PAIS do paciente:");
                 paciente.setPais(pais);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getPais());
                 chamaCadastroPacientes();
                 break;
             case 6:
                 String uf = JOptionPane.showInputDialog("Escreva o UF do paciente:");
                 paciente.setUf(uf);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getUf());
                 chamaCadastroPacientes();
                 break;
             case 7:
                 String bairro = JOptionPane.showInputDialog("Escreva o BAIRRO do paciente:");
                 paciente.setBairro(bairro);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getBairro());
                 chamaCadastroPacientes();
                 break;
             case 8:
                 String rua = JOptionPane.showInputDialog("Escreva o RUA do paciente:");
                 paciente.setRua(rua);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getRua());
                 chamaCadastroPacientes();
                 break;
             case 9:
                 String telefone = JOptionPane.showInputDialog("Escreva o TELEFONE do paciente:");
                 paciente.setTelefone(telefone);
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getTelefone());
                 chamaCadastroPacientes();
                 break;
@@ -164,7 +172,8 @@ public class Main {
                 String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente:");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 paciente.setDataNascimento(LocalDate.parse(dataNacimento, formatter));
-                pacientes.add(paciente);
+                //pacientes.add(paciente);
+                PacienteDAO.save(paciente);
                 System.out.println(paciente.getDataNascimento());
                 chamaCadastroPacientes();
                 break;
@@ -172,12 +181,24 @@ public class Main {
                 menuOpcaoSistemas();
                 break;
         }
-       // return chamaCadastroPacientes(); VER SE VAMOS RETORNAR ALGO OU NÃO
+        PacienteDAO.save(pacientes);
+        return pacientes.toString();
     }
-    private static String mostraListaPaciente(){
-       //CRIAR UM RELATORIO
+    private String mostraListaPaciente(){
+        List<Paciente> pacientes = PacienteDAO.findPacientes();
+
+        for (Paciente paciente : pacientes){
+            System.out.println(paciente.getNome());
+        }
+
 
         return mostraListaPaciente();
+    }
+    private static void chamaMenuEnfermeiro(){
+        // mostrarListapaciente(), mostrarClassificacao(), triagem()
+
+
+
     }
 }
 

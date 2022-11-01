@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class Main {
             chamaRecepcionista();
         }
         else if (selecionado == Funcionario.CargosFuncionarios.ENFERMEIRO){
-            // CHAMAR ENFERMEIRO
+            chamaMenuEnfermeiro();
         }
         else if(selecionado ==Funcionario.CargosFuncionarios.MEDICO){
             // CHAMAR MEDICO
@@ -184,22 +183,25 @@ public class Main {
         PacienteDAO.save(pacientes);
         return pacientes.toString();
     }
-    private String mostraListaPaciente(){
+    private static void mostraListaPaciente(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
 
         for (Paciente paciente : pacientes){
-            System.out.println(paciente.getNome());
+
+                System.out.println(paciente.getNome());
+                JOptionPane.showConfirmDialog(null, "PROXIMOS PACIENTES: \n"+paciente.getNome());
+                // CRIAR SISTEMA DE CHAMADA E FILA
         }
 
 
-        return mostraListaPaciente();
+      //return mostraListaPaciente();
     }
     private static void chamaMenuEnfermeiro(){
         // mostrarListapaciente(), mostrarClassificacao(), triagem()
-
-
+        mostraListaPaciente();
 
     }
+
 }
 
 

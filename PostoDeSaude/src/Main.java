@@ -194,8 +194,22 @@ public class Main {
         }
         JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
         int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "+nomePacientes.get(0)+"?");
-        nomePacientes.remove(0);
-        System.out.println(nomePacientes);
+        switch (chamandoPaciente){
+            case 0:
+                // conectar com o paciente com o primeiro nome da lista e após remover da lista
+            nomePacientes.remove(0);
+            System.out.println(nomePacientes);
+            break;
+            case 1:
+                // retornar para menu enfermeiro
+                chamaMenuEnfermeiro();
+                break;
+            case 2:
+                JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                        "AVISO",0);
+                exit(0);
+        }
+
       //return mostraListaPaciente();
     }
     private static void chamaMenuEnfermeiro(){

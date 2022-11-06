@@ -11,7 +11,10 @@ public class Paciente extends Pessoa{
         this.cartaoSus = cartaoSus;
     }
 
-
+//    public abstract String mostraPacientes(){
+//        this.getNome();
+//        return mostraPacientes();
+//    }
 
 
 }

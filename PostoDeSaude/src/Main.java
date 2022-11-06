@@ -78,7 +78,7 @@ public class Main {
         //return chamaConfirmacao();
     }
 
-    private static String chamaCadastroPacientes() {// VER SE VAMOS RETORNAR ALGUMA COISA
+    private static String chamaCadastroPacientes() {
         List<Paciente> pacientes = new ArrayList<>();
         Paciente paciente = new Paciente();
         pacientes.add(paciente);
@@ -98,7 +98,7 @@ public class Main {
             case 1:
                 String nome = JOptionPane.showInputDialog("Escreva o NOME do paciente: ");
                 paciente.setNome(nome);
-                //pacientes.add(paciente);
+                pacientes.add(paciente);
                 PacienteDAO.save(paciente);
                 System.out.println(paciente.getNome());
                 chamaCadastroPacientes();
@@ -185,20 +185,50 @@ public class Main {
     }
     private static void mostraListaPaciente(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
-
+        List<String> nomePacientes = new ArrayList<>();
+//        JOptionPane.showMessageDialog(null,"PROXIMOS PACIENTES: \n"+ pacientes);
         for (Paciente paciente : pacientes){
-
                 System.out.println(paciente.getNome());
-                JOptionPane.showConfirmDialog(null, "PROXIMOS PACIENTES: \n"+paciente.getNome());
+                nomePacientes.add(paciente.getNome());
                 // CRIAR SISTEMA DE CHAMADA E FILA
         }
-
-
+        JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
+        int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "+nomePacientes.get(0)+"?");
+        nomePacientes.remove(0);
+        System.out.println(nomePacientes);
       //return mostraListaPaciente();
     }
     private static void chamaMenuEnfermeiro(){
         // mostrarListapaciente(), mostrarClassificacao(), triagem()
-        mostraListaPaciente();
+
+        String[] opcaoMenuEnfermeiro = {"MOSTRAR PACIENTES", "TRIAGEM", "MOSTRAR CLASSIFICAÇÃO", "VOLTAR","CANCELAR"};
+        int menuCadastroEnfermeiro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu enfermeiro",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuEnfermeiro, opcaoMenuEnfermeiro[0]);
+        switch (menuCadastroEnfermeiro){
+            case 0:
+                mostraListaPaciente();
+            break;
+            case 1:
+                // cahama triagem do paciente
+                break;
+            case 2:
+                // mostra classificacao pensar em algo melhor
+                break;
+            case 3:
+                menuOpcaoSistemas();
+                break;
+            case 4:
+                JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                        "AVISO",0);
+                exit(0);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                        "AVISO",0);
+                exit(0);
+        }
+
 
     }
 

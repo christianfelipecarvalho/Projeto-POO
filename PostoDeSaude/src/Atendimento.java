@@ -4,7 +4,4 @@ import java.util.List;
 public class Atendimento {
 
 
-
-
-
 }

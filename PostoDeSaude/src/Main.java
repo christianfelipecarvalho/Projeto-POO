@@ -190,13 +190,14 @@ public class Main {
         for (Paciente paciente : pacientes){
                 System.out.println(paciente.getNome());
                 nomePacientes.add(paciente.getNome());
-                // CRIAR SISTEMA DE CHAMADA E FILA
+                // CRIAR SISTEMA DE CHAMADA E FILAc
         }
         JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
         int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "+nomePacientes.get(0)+"?");
         switch (chamandoPaciente){
             case 0:
                 // conectar com o paciente com o primeiro nome da lista e após remover da lista
+
             nomePacientes.remove(0);
             System.out.println(nomePacientes);
             break;
@@ -209,7 +210,6 @@ public class Main {
                         "AVISO",0);
                 exit(0);
         }
-
       //return mostraListaPaciente();
     }
     private static void chamaMenuEnfermeiro(){
@@ -224,7 +224,7 @@ public class Main {
                 mostraListaPaciente();
             break;
             case 1:
-                // cahama triagem do paciente
+                // chama triagem do paciente
                 break;
             case 2:
                 // mostra classificacao pensar em algo melhor
@@ -242,10 +242,7 @@ public class Main {
                         "AVISO",0);
                 exit(0);
         }
-
-
     }
-
 }
 
 

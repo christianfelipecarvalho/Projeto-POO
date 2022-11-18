@@ -18,6 +18,7 @@ public class Main {
 //            matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
 //        }
         menuOpcaoSistemas();
+        System.out.println("teste");
     }
 
     private static Object menuOpcaoSistemas() {

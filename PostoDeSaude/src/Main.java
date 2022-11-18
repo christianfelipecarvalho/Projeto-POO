@@ -208,24 +208,23 @@ public class Main {
     private static void chamaMenuEnfermeiro(){
         // mostrarListapaciente(), mostrarClassificacao(), triagem()
 
-        String[] opcaoMenuEnfermeiro = {"MOSTRAR PACIENTES", "TRIAGEM", "MOSTRAR CLASSIFICAÇÃO", "VOLTAR","CANCELAR"};
+        String[] opcaoMenuEnfermeiro = {"TRIAGEM","MOSTRAR CLASSIFICAÇÃO", "VOLTAR","CANCELAR"};
         int menuCadastroEnfermeiro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu enfermeiro",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuEnfermeiro, opcaoMenuEnfermeiro[0]);
         switch (menuCadastroEnfermeiro){
             case 0:
                 mostraListaPaciente();
+                // chama triagem do paciente
             break;
             case 1:
-                // chama triagem do paciente
-                break;
-            case 2:
+                // MOSTRA A CLASSIFICACAO
                 // mostra classificacao pensar em algo melhor
                 break;
-            case 3:
+            case 2:
                 menuOpcaoSistemas();
                 break;
-            case 4:
+            case 3:
                 JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                         "AVISO",0);
                 exit(0);

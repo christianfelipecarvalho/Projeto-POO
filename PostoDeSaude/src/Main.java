@@ -8,17 +8,9 @@ import static java.lang.System.exit;
 
 public class Main {
     public static void main(String[] args) {
-//        List<String> cargos = new ArrayList<>();
-//
-//        for (Funcionario funcionario : FuncionarioDAO.findFuncionarios()) {
-//            cargos.add(funcionario.getCargo());
-//        }
-//        List<String> matriculaGeral = new ArrayList<>();
-//        for (Funcionario funcionarioMatricula : FuncionarioDAO.findFuncionarios()) {
-//            matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
-//        }
+
         menuOpcaoSistemas();
-        System.out.println("teste");
+
     }
 
     private static Object menuOpcaoSistemas() {

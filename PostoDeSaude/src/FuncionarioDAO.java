@@ -4,7 +4,6 @@ import java.util.List;
 public final class FuncionarioDAO {
     public static List<Funcionario> funcionarios = new ArrayList<>();
 
-
     public static List<Funcionario> findFuncionarios() {
         funcionarios = new ArrayList<>();
         Funcionario recepcionista = new Funcionario();
@@ -49,12 +48,24 @@ public final class FuncionarioDAO {
     }
 
     public static List<Funcionario> findFuncionarios(Funcionario.CargosFuncionarios cargo) {
+
         List<Funcionario> funcionariosByCargo = new ArrayList<>();
         for (Funcionario funcionario : findFuncionarios()) {
             if(funcionario.getCargo().equals(cargo.toString())){
                 funcionariosByCargo.add(funcionario);
             }
         }
+
+        List<String> cargos = new ArrayList<>();
+
+        for (Funcionario funcionario : FuncionarioDAO.findFuncionarios()) {
+            cargos.add(funcionario.getCargo());
+        }
+        List<String> matriculaGeral = new ArrayList<>();
+        for (Funcionario funcionarioMatricula : FuncionarioDAO.findFuncionarios()) {
+            matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
+        }
+
         return funcionariosByCargo;
     }
 }

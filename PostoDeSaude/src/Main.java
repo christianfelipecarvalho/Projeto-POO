@@ -68,7 +68,6 @@ public class Main {
                     "AVISO",0);
             exit(0);
         }
-        //return chamaConfirmacao();
     }
 
     private static String chamaCadastroPacientes() {
@@ -176,23 +175,27 @@ public class Main {
         PacienteDAO.save(pacientes);
         return pacientes.toString();
     }
-    private static void mostraListaPaciente(){
+    private static void ListaPacientes(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
         List<String> nomePacientes = new ArrayList<>();
-//        JOptionPane.showMessageDialog(null,"PROXIMOS PACIENTES: \n"+ pacientes);
         for (Paciente paciente : pacientes){
                 System.out.println(paciente.getNome());
                 nomePacientes.add(paciente.getNome());
-                // CRIAR SISTEMA DE CHAMADA E FILAc
         }
-        JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
-        int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "+nomePacientes.get(0)+"?");
+        if(nomePacientes.size() == 0){
+            JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 0);
+            menuOpcaoSistemas();
+        }
+            JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
+           int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "
+                +nomePacientes.get(0)+" para triagem?");
         switch (chamandoPaciente){
             case 0:
                 // conectar com o paciente com o primeiro nome da lista e após remover da lista
-
+                JOptionPane.showMessageDialog(null, "Paciente: "+ nomePacientes.get(0),
+                    "AVISO",2);
             nomePacientes.remove(0);
-            System.out.println(nomePacientes);
+//            System.out.println(nomePacientes);
             break;
             case 1:
                 // retornar para menu enfermeiro
@@ -203,7 +206,7 @@ public class Main {
                         "AVISO",0);
                 exit(0);
         }
-      //return mostraListaPaciente();
+
     }
     private static void chamaMenuEnfermeiro(){
         // mostrarListapaciente(), mostrarClassificacao(), triagem()
@@ -214,7 +217,8 @@ public class Main {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuEnfermeiro, opcaoMenuEnfermeiro[0]);
         switch (menuCadastroEnfermeiro){
             case 0:
-                mostraListaPaciente();
+                // lista pacientes
+                ListaPacientes();
                 // chama triagem do paciente
             break;
             case 1:
@@ -235,6 +239,7 @@ public class Main {
                 exit(0);
         }
     }
+
 }
 
 

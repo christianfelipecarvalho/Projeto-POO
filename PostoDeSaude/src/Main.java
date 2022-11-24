@@ -8,8 +8,12 @@ import static java.lang.System.exit;
 
 public class Main {
     public static void main(String[] args) {
-
-        menuOpcaoSistemas();
+        try {
+            menuOpcaoSistemas();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Erro no sistema!\n Entre em contato com o suporte!!!",
+                    "ERRO", 0);
+        }
 
     }
 
@@ -29,6 +33,7 @@ public class Main {
         }
         else if(selecionado ==Funcionario.CargosFuncionarios.MEDICO){
             // CHAMAR MEDICO
+            chamaMenuMedico();
         }
         else if(selecionado == null){
             JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
@@ -42,19 +47,23 @@ public class Main {
         for (Funcionario funcionario : FuncionarioDAO.findFuncionarios(Funcionario.CargosFuncionarios.RECEPCIONISTA)) {
             matriculaFuncionrio.add(funcionario.getMatricula());
         }
-        Object[] recepcionistaMatricula = matriculaFuncionrio.toArray();// {recepcionista.getMatricula(), recepcionista2.getMatricula(), recepcionista3.getMatricula()};
 
-        Object confirmacao = JOptionPane.showInputDialog(null,
-                "Você selecionou Recepcionista? Selecione sua matricula:", "Confirmação", 1,
-                null, recepcionistaMatricula, "");
+        String confirmacao = JOptionPane.showInputDialog(null,
+                "Digite sua senha:","MENU RECEPCIONISTA",3);
         if (confirmacao == null) {
             JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                     "AVISO",0);
             exit(0);
+        }else if(confirmacao.equals(matriculaFuncionrio.get(0).toString())
+                || confirmacao.equals(matriculaFuncionrio.get(1)) || confirmacao.equals(matriculaFuncionrio.get(2))){
+
+
+            chamaConfirmacao();
+
         }
         else{
-            chamaConfirmacao();
-        }
+            JOptionPane.showMessageDialog(null, "SENHA INVÁLIDA TENTE NOVAMENTE", "ERRO",0);
+            chamaRecepcionista();}
     }
     private static void chamaConfirmacao() {
         int confirmacaoCadastroPaciente = JOptionPane.showConfirmDialog(null, "Deseja cadastrar o paciente? ");
@@ -209,8 +218,18 @@ public class Main {
 
     }
     private static void chamaMenuEnfermeiro(){
+        List<Integer> matriculaFuncionario = new ArrayList<>();
+        for (Funcionario funcionario : FuncionarioDAO.findFuncionarios(Funcionario.CargosFuncionarios.ENFERMEIRO)) {
+            matriculaFuncionario.add(funcionario.getMatricula());
+        }
         // mostrarListapaciente(), mostrarClassificacao(), triagem()
-
+        String verificaSenha = JOptionPane.showInputDialog(null, "Digite a senha: ","MENU ENFERMEIRO",3);
+        if (verificaSenha== null) {
+            JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                    "AVISO",0);
+            exit(0);
+        }
+        if(verificaSenha.equals(matriculaFuncionario.get(0).toString())){
         String[] opcaoMenuEnfermeiro = {"TRIAGEM","MOSTRAR CLASSIFICAÇÃO", "VOLTAR","CANCELAR"};
         int menuCadastroEnfermeiro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu enfermeiro",
@@ -238,8 +257,54 @@ public class Main {
                         "AVISO",0);
                 exit(0);
         }
-    }
+    } else if (verificaSenha!= matriculaFuncionario.get(0).toString()) {
+            JOptionPane.showMessageDialog(null, "SENHA INVÁLIDA TENTE NOVAMENTE", "ERRO",0);
+            chamaMenuEnfermeiro();
+        }}
+    public static void chamaMenuMedico(){
+        List<Integer> matriculaFuncionario = new ArrayList<>();
+        for (Funcionario funcionario : FuncionarioDAO.findFuncionarios(Funcionario.CargosFuncionarios.MEDICO)) {
+            matriculaFuncionario.add(funcionario.getMatricula());
+        }
+        String verificaSenha = JOptionPane.showInputDialog(null, "Digite a senha: ","MENU MÉDICO",3);
+        if (verificaSenha== null) {
+            JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                    "AVISO",0);
+            exit(0);
+        }
+        if(verificaSenha.equals(matriculaFuncionario.get(0).toString())){
+            String[] opcaoMenuMedico = {"CONSULTA","MOSTRAR CLASSIFICAÇÃO", "VOLTAR","CANCELAR"};
+            int menuCadastroMedico = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                    "Menu Médico",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuMedico, opcaoMenuMedico[0]);
+            switch (menuCadastroMedico){
+                case 0:
+                    // lista pacientes
+                    ListaPacientes();// essa é a lista do enfermeiro
+                    // chama paciente para consulta com base na lista do enfermeiro do paciente
+                    break;
+                case 1:
+                    // MOSTRA TODAS AS LISTAS NO SISTEMA
+                    break;
+                case 2:
+                    menuOpcaoSistemas();
+                    break;
+                case 3:
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+            }
+        } else if (verificaSenha!= matriculaFuncionario.get(0).toString()) {
+            JOptionPane.showMessageDialog(null, "SENHA INVÁLIDA TENTE NOVAMENTE", "ERRO",0);
+            chamaMenuMedico();
+        }
 
+    }
 }
 
 

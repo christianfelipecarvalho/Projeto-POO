@@ -1,9 +1,16 @@
-public class Funcionario extends Pessoa{
+import Interface.fila;
+
+public class Funcionario extends Pessoa implements fila {
     private String cargo;
     private String setor;
     private String emailCorporativo;
     private Integer matricula;
     private String conselho;
+
+    @Override
+    public void fila() {
+
+    }
 
     public  enum CargosFuncionarios{
         RECEPCIONISTA,

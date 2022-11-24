@@ -25,6 +25,7 @@ public final class FuncionarioDAO {
         recepcionista3.setMatricula(1003);
         recepcionista3.setCargo(String.valueOf(Funcionario.CargosFuncionarios.RECEPCIONISTA));
         funcionarios.add(recepcionista3);
+
         Funcionario enfermeiro = new Funcionario();
         enfermeiro.setCargo(String.valueOf(Funcionario.CargosFuncionarios.ENFERMEIRO));
         enfermeiro.setSetor("Triagem");

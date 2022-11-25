@@ -1,6 +1,10 @@
-import Interface.fila;
+package Principal;
 
-public class Funcionario extends Pessoa implements fila {
+import Interface.relatorio;
+
+import javax.swing.*;
+
+public class Funcionario extends Pessoa implements relatorio {
     private String cargo;
     private String setor;
     private String emailCorporativo;
@@ -8,8 +12,7 @@ public class Funcionario extends Pessoa implements fila {
     private String conselho;
 
     @Override
-    public void fila() {
-
+    public void relatorio() {
     }
 
     public  enum CargosFuncionarios{

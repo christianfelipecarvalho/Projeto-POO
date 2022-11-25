@@ -1,8 +1,9 @@
-import javax.swing.*;
+package repository;
+
+import Principal.Paciente;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.System.exit;
 
 public final class PacienteDAO {
     private static List<Paciente> pacientes = new ArrayList<>();

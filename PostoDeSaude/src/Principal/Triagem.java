@@ -1,4 +1,8 @@
-public class Triagem extends SinaisVitais {
+package Principal;
+
+import Interface.relatorio;
+
+public class Triagem extends SinaisVitais implements relatorio {
 
 
     private Paciente paciente;
@@ -38,4 +42,8 @@ public class Triagem extends SinaisVitais {
         this.filaDeEspera = filaDeEspera;
     }
 
+    @Override
+    public void relatorio() {
+
+    }
 }

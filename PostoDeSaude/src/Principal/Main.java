@@ -1,3 +1,8 @@
+package Principal;
+
+import repository.FuncionarioDAO;
+import repository.PacienteDAO;
+
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +19,6 @@ public class Main {
             JOptionPane.showMessageDialog(null,"Erro no sistema!\n Entre em contato com o suporte!!!",
                     "ERRO", 0);
         }
-
     }
 
     private static Object menuOpcaoSistemas() {
@@ -79,7 +83,7 @@ public class Main {
         }
     }
 
-    private static String chamaCadastroPacientes() {
+    public static String chamaCadastroPacientes() {
         List<Paciente> pacientes = new ArrayList<>();
         Paciente paciente = new Paciente();
         pacientes.add(paciente);
@@ -201,7 +205,7 @@ public class Main {
         switch (chamandoPaciente){
             case 0:
                 // conectar com o paciente com o primeiro nome da lista e após remover da lista
-                JOptionPane.showMessageDialog(null, "Paciente: "+ nomePacientes.get(0),
+                JOptionPane.showMessageDialog(null, "Principal.Paciente: "+ nomePacientes.get(0),
                     "AVISO",2);
             nomePacientes.remove(0);
 //            System.out.println(nomePacientes);
@@ -215,7 +219,6 @@ public class Main {
                         "AVISO",0);
                 exit(0);
         }
-
     }
     private static void chamaMenuEnfermeiro(){
         List<Integer> matriculaFuncionario = new ArrayList<>();

@@ -1,3 +1,5 @@
+package Principal;
+
 public class SinaisVitais {
 
     private Double temperatura;

@@ -1,7 +1,12 @@
+package repository;
+
+import Principal.Funcionario;
+import Principal.Medico;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public final class FuncionarioDAO {
+public final class FuncionarioDAO  {
     public static List<Funcionario> funcionarios = new ArrayList<>();
 
     public static List<Funcionario> findFuncionarios() {
@@ -28,7 +33,7 @@ public final class FuncionarioDAO {
 
         Funcionario enfermeiro = new Funcionario();
         enfermeiro.setCargo(String.valueOf(Funcionario.CargosFuncionarios.ENFERMEIRO));
-        enfermeiro.setSetor("Triagem");
+        enfermeiro.setSetor("Principal.Triagem");
         enfermeiro.setConselho("coren");
         enfermeiro.setMatricula(23434);
         enfermeiro.setNome("Paula");

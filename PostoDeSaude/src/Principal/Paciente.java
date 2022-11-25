@@ -1,6 +1,8 @@
-import java.time.LocalDate;
+package Principal;
 
-public class Paciente extends Pessoa{
+import Interface.relatorio;
+
+public class Paciente extends Pessoa implements relatorio {
     private String cartaoSus;
 
     public String getCartaoSus() {
@@ -11,10 +13,9 @@ public class Paciente extends Pessoa{
         this.cartaoSus = cartaoSus;
     }
 
-//    public abstract String mostraPacientes(){
-//        this.getNome();
-//        return mostraPacientes();
-//    }
 
+    @Override
+    public void relatorio() {
 
+    }
 }

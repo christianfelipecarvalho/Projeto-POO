@@ -1,10 +1,6 @@
 package Principal;
-
-import Interface.relatorio;
-
-public class Triagem extends SinaisVitais implements relatorio {
-
-
+import Interface.relatorios;
+public class Triagem extends SinaisVitais {
     private Paciente paciente;
     private Double peso;
     private Double altura;
@@ -40,10 +36,5 @@ public class Triagem extends SinaisVitais implements relatorio {
 
     public void setFilaDeEspera(FilaDeEspera filaDeEspera) {
         this.filaDeEspera = filaDeEspera;
-    }
-
-    @Override
-    public void relatorio() {
-
     }
 }

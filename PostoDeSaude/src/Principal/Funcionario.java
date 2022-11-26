@@ -1,19 +1,21 @@
 package Principal;
 
-import Interface.relatorio;
+import Interface.relatorios;
 
-import javax.swing.*;
+import java.util.List;
 
-public class Funcionario extends Pessoa implements relatorio {
+public class Funcionario extends Pessoa  {
     private String cargo;
     private String setor;
     private String emailCorporativo;
     private Integer matricula;
     private String conselho;
 
-    @Override
-    public void relatorio() {
-    }
+//    @Override
+//    public List<relatorios> relatorioGeral() {
+//    return relatorios;
+//    }
+//
 
     public  enum CargosFuncionarios{
         RECEPCIONISTA,

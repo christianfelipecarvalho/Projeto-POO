@@ -1,7 +1,5 @@
 package repository;
-
 import Principal.Paciente;
-
 import java.util.ArrayList;
 import java.util.List;
 

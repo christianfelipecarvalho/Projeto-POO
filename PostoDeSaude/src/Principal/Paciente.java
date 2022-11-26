@@ -1,8 +1,14 @@
 package Principal;
 
-import Interface.relatorio;
+import Interface.relatorios;
+import repository.PacienteDAO;
 
-public class Paciente extends Pessoa implements relatorio {
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Paciente extends Pessoa implements relatorios {
+    static List<relatorios> relatorios = new ArrayList<>();
     private String cartaoSus;
 
     public String getCartaoSus() {
@@ -15,7 +21,22 @@ public class Paciente extends Pessoa implements relatorio {
 
 
     @Override
-    public void relatorio() {
+    public void relatorioGeral() {
+        List<Paciente> pacientes = PacienteDAO.findPacientes();
+        List<String> relatorio = new ArrayList<>();
+        for (Paciente paciente : pacientes){
+//            relatorio.add("Código: "+paciente.getCodigo()+ " ||" + "Nome: "+paciente.getNome()+ "\n"
+//                    +"Cpf: "+paciente.getCpf()+ "\n" + "Bairro: "+ paciente.getBairro());
+            relatorio.add(paciente.getNome());
+//            relatorio.add(paciente.getCpf());
+        }
+        JOptionPane.showMessageDialog(null, "Pacientes: "+ relatorio, "RELATÓRIO", 1);
+    }
 
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "Nome='" + getNome() + '\'' +"Cpf: "+ getCpf()+
+                '}';
     }
 }

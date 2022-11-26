@@ -15,7 +15,7 @@ public final class FuncionarioDAO  {
         recepcionista.setCargo(String.valueOf(Funcionario.CargosFuncionarios.RECEPCIONISTA));
         recepcionista.setSetor("Recepção");
         recepcionista.setConselho("");
-        recepcionista.setMatricula(1000);
+        recepcionista.setMatricula(1);
         recepcionista.setNome("Ana");
         recepcionista.setCpf("578.656.999-80");
         recepcionista.getCargo();

@@ -290,43 +290,51 @@ public class Main {
                     break;
                 case 1:
                     triagemPaciente.setFilaDeEspera(FilaDeEspera.POUCOURGENTE);
-                    JOptionPane.showConfirmDialog(null, "Paciente triado com sucesso!\nTempo de espera padrão até 60 minutos.\nDeseja chamar o proximo? ", "TRIAGEM", 1);
+                    int selecao1 = JOptionPane.showConfirmDialog(null, "Paciente triado com sucesso!\nTempo de espera padrão até 60 minutos.\nDeseja chamar o proximo? ", "TRIAGEM", 1);
                     triagem.remove(0);
-
-                    // CHAMAR PROXIMO
-                    // ADICIONAR NO RELATÓRIO
+                    if (selecao1 == 1){
+                        chamaMenuEnfermeiro();
+                    }
+                    else if(selecao1 == 2){
+                        JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                                "AVISO",0);
+                        exit(0);
+                    }
                     break;
                 case 2:
                     triagemPaciente.setFilaDeEspera(FilaDeEspera.URGENTE);
-                    JOptionPane.showConfirmDialog(null, "Paciente triado com sucesso!\nTempo de espera padrão até 30 minutos.\nDeseja chamar o proximo? ", "TRIAGEM", 1);
+                    int selecao2 = JOptionPane.showConfirmDialog(null, "Paciente triado com sucesso!\nTempo de espera padrão até 30 minutos.\nDeseja chamar o proximo? ", "TRIAGEM", 1);
                     triagem.remove(0);
+                    if (selecao2 == 1){
+                        chamaMenuEnfermeiro();
+                    }
+                    else if(selecao2 == 2){
+                        JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                                "AVISO",0);
+                        exit(0);
+                    }
 
-                    // CHAMAR PROXIMO
-                    // ADICIONAR NO RELATÓRIO
                     break;
                 case 3:
                     triagemPaciente.setFilaDeEspera(FilaDeEspera.MUITOURGENTE);
                     JOptionPane.showMessageDialog(null, "PACIENTE NECESSITA DE ATENDIMENTO IMEDIATO LEVE ATÉ O CONSULTÓRIO. ", "TRIAGEM", 0);
-                    JOptionPane.showConfirmDialog(null, "Deseja chamar o proximo? ", "TRIAGEM", 1);
+                    int selecao3 =JOptionPane.showConfirmDialog(null, "Deseja chamar o proximo? ", "TRIAGEM", 1);
                     triagem.remove(0);
-
-                    // CHAMAR PROXIMO
-                    // ADICIONAR NO RELATÓRIO
+                    if (selecao3 == 1){
+                        chamaMenuEnfermeiro();
+                    }
+                    else if(selecao3 == 2){
+                        JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                                "AVISO",0);
+                        exit(0);
+                    }
                     break;
             }
-//        }
-//            else  {
-//                TriagemDAO.save(triagens);
-//                PacienteDAO.save(pacientes);
-//                JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 0);
-//                chamaMenuEnfermeiro();
-//            }
-            //chamaMenuEnfermeiro();
         }
-        triagens.add(triagemPaciente);
-        TriagemDAO.save(triagens);
-        JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 0);
-        chamaMenuEnfermeiro();}
+            triagens.add(triagemPaciente);
+            TriagemDAO.save(triagens);
+            JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 0);
+            chamaMenuEnfermeiro();}
     private static void chamaMenuEnfermeiro(){
         List<Integer> matriculaFuncionario = new ArrayList<>();
         for (Funcionario funcionario : FuncionarioDAO.findFuncionarios(Funcionario.CargosFuncionarios.ENFERMEIRO)) {

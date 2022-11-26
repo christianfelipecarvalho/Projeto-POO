@@ -1,6 +1,7 @@
 package Principal;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public abstract class Pessoa {
     private Integer codigo;
@@ -35,7 +36,9 @@ public abstract class Pessoa {
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+        Random random = new Random();
+        int numero = random.nextInt(10);
+        this.codigo = numero;
     }
 
     public String getNome() {

@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+//import static Principal.Paciente.chamaCadastroPacientes;
 import static java.lang.System.exit;
 
 public class Main {
@@ -22,7 +23,7 @@ public class Main {
         }
     }
 
-    private static Object menuOpcaoSistemas() {
+    static Object menuOpcaoSistemas() {
         Object[] opcaoInicial = {Funcionario.CargosFuncionarios.RECEPCIONISTA, Funcionario.CargosFuncionarios.ENFERMEIRO,
                 Funcionario.CargosFuncionarios.MEDICO};
         Object selecionado = JOptionPane.showInputDialog(null, "Selecione qual sistema você quer acessar:",
@@ -44,6 +45,135 @@ public class Main {
             exit(0);
         }
         return selecionado;
+    }
+    public static void chamaCadastroPacientes() {
+        List<Paciente> pacientes = new ArrayList<>();
+        //List<relatorios> relatorios = new ArrayList<>();
+        Paciente paciente = new Paciente();
+        pacientes.add(paciente);
+//        String[] opcaoMenuPaciente = {"NOME", "CPF", "RG", "CARTÃO SUS", "PAIS",
+//                "UF", "BAIRRO", "RUA", "TELEFONE", "DATA DE NASCIMENTO", "VOLTAR"};
+        String[] opcaoMenuPaciente = {"DADOS BASICOS", "INFORMAÇÕES COMPLEMENTARES", "VOLTAR", "CANCELAR"};
+        int menuCadastroPaciente = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
+                "Menu Cadastro",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuPaciente, opcaoMenuPaciente[0]);
+        switch (menuCadastroPaciente) {
+            case 0:
+                paciente.setCodigo(0);
+                paciente.setAtendimento(0);
+                String nome = JOptionPane.showInputDialog("Escreva o NOME do paciente: ");
+                paciente.setNome(nome);
+                System.out.println(paciente.getNome());
+                if (nome == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+
+                String cpf = JOptionPane.showInputDialog("Escreva o CPF do paciente:");
+                paciente.setCpf(cpf);
+                if (cpf== null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getCpf());
+                String rg = JOptionPane.showInputDialog("Escreva o RG do paciente:");
+                paciente.setRg(rg);
+
+                if (rg== null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getRg());
+
+                String cartaoSus = JOptionPane.showInputDialog("Escreva o CARTÃO DO SUS do paciente:");
+                paciente.setCartaoSus(cartaoSus);
+
+                if (cartaoSus == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getCartaoSus());
+                pacientes.add(paciente);
+                PacienteDAO.save(paciente);
+                chamaCadastroPacientes();
+                break;
+            case 1:
+                String pais = JOptionPane.showInputDialog("Escreva o PAIS do paciente:");
+                paciente.setPais(pais);
+                System.out.println(paciente.getPais());
+                if (pais == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+
+                String uf = JOptionPane.showInputDialog("Escreva o UF do paciente:");
+                paciente.setUf(uf);
+                if (uf == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getUf());
+
+
+                String bairro = JOptionPane.showInputDialog("Escreva o BAIRRO do paciente:");
+                paciente.setBairro(bairro);
+                if (bairro == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getBairro());
+
+                String rua = JOptionPane.showInputDialog("Escreva o RUA do paciente:");
+                paciente.setRua(rua);
+
+                if (rua == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getRua());
+
+                String telefone = JOptionPane.showInputDialog("Escreva o TELEFONE do paciente:");
+                paciente.setTelefone(telefone);
+                if (telefone == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getTelefone());
+
+                String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente:");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                paciente.setDataNascimento(LocalDate.parse(dataNacimento, formatter));
+
+                if (dataNacimento == null) {
+                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                            "AVISO",0);
+                    exit(0);
+                }
+                System.out.println(paciente.getDataNascimento());
+                pacientes.add(paciente);
+                PacienteDAO.save(paciente);
+                menuOpcaoSistemas();
+                break;
+            case 2:
+                menuOpcaoSistemas();
+                break;
+            case 3:
+                JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                        "AVISO",0);
+                exit(0);
+                break;
+        }
+        PacienteDAO.save(pacientes);
+
     }
     private static void chamaRecepcionista() {
         List<Integer> matriculaFuncionrio = new ArrayList<>();
@@ -79,116 +209,8 @@ public class Main {
         }
     }
 
-    public static void chamaCadastroPacientes() {
-        List<Paciente> pacientes = new ArrayList<>();
-        //List<relatorios> relatorios = new ArrayList<>();
-        Paciente paciente = new Paciente();
-        pacientes.add(paciente);
-        String[] opcaoMenuPaciente = {"NOME", "CPF", "RG", "CARTÃO SUS", "PAIS",
-                "UF", "BAIRRO", "RUA", "TELEFONE", "DATA DE NASCIMENTO", "VOLTAR"};
-        int menuCadastroPaciente = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
-                "Menu Cadastro",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuPaciente, opcaoMenuPaciente[0]);
-        switch (menuCadastroPaciente) {
-            case 0:
-                //                int codigo = 0;
-//                paciente.setCodigo(codigo++);
-//                PacienteDAO.save(paciente);
-//                relatorios.add(paciente); configurar codigo automatico na classe
-                String nome = JOptionPane.showInputDialog("Escreva o NOME do paciente: ");
-                paciente.setNome(nome);
-                pacientes.add(paciente);
-                PacienteDAO.save(paciente);
-                System.out.println(paciente.getNome());
-                //relatorios.add(paciente);
-                chamaCadastroPacientes();
 
-                break;
-            case 1:
-                String cpf = JOptionPane.showInputDialog("Escreva o CPF do paciente:");
-                paciente.setCpf(cpf);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                //relatorios.add(paciente);
-                System.out.println(paciente.getCpf());
-                chamaCadastroPacientes();
-                break;
-            case 2:
-                String rg = JOptionPane.showInputDialog("Escreva o RG do paciente:");
-                paciente.setRg(rg);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                //relatorios.add(paciente);
-                System.out.println(paciente.getRg());
-                chamaCadastroPacientes();
-
-                break;
-            case 3:
-                String cartaoSus = JOptionPane.showInputDialog("Escreva o CARTÃO DO SUS do paciente:");
-                paciente.setCartaoSus(cartaoSus);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                //relatorios.add(paciente);
-                System.out.println(paciente.getCartaoSus());
-                chamaCadastroPacientes();
-                break;
-            case 4:
-                String pais = JOptionPane.showInputDialog("Escreva o PAIS do paciente:");
-                paciente.setPais(pais);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                System.out.println(paciente.getPais());
-                chamaCadastroPacientes();
-                break;
-            case 5:
-                String uf = JOptionPane.showInputDialog("Escreva o UF do paciente:");
-                paciente.setUf(uf);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                System.out.println(paciente.getUf());
-                chamaCadastroPacientes();
-                break;
-            case 6:
-                String bairro = JOptionPane.showInputDialog("Escreva o BAIRRO do paciente:");
-                paciente.setBairro(bairro);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                System.out.println(paciente.getBairro());
-                chamaCadastroPacientes();
-                break;
-            case 7:
-                String rua = JOptionPane.showInputDialog("Escreva o RUA do paciente:");
-                paciente.setRua(rua);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                System.out.println(paciente.getRua());
-                chamaCadastroPacientes();
-                break;
-            case 8:
-                String telefone = JOptionPane.showInputDialog("Escreva o TELEFONE do paciente:");
-                paciente.setTelefone(telefone);
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                System.out.println(paciente.getTelefone());
-                chamaCadastroPacientes();
-                break;
-            case 9:
-                String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente:");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                paciente.setDataNascimento(LocalDate.parse(dataNacimento, formatter));
-                //pacientes.add(paciente);
-                //PacienteDAO.save(paciente);
-                System.out.println(paciente.getDataNascimento());
-                chamaCadastroPacientes();
-                break;
-            case 10:
-                menuOpcaoSistemas();
-                break;
-        }
-        PacienteDAO.save(pacientes);
-        //return pacientes.toString();
-    }
-    private static void ListaPacientes(){
+    public static void ListaPacientes(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
         List<String> nomePacientes = new ArrayList<>();
         for (Paciente paciente : pacientes){
@@ -202,7 +224,7 @@ public class Main {
             JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 0);
             menuOpcaoSistemas();
         }
-            JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+pacientes);
+            JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
            int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "
                 +nomePacientes.get(0)+" para triagem?");
         switch (chamandoPaciente){
@@ -244,6 +266,8 @@ public class Main {
             case 0:
                 // lista pacientes
                 ListaPacientes();
+                Triagem triagem = new Triagem();
+                triagem.triagem();
                 // chama triagem do paciente
             break;
             case 1:
@@ -294,6 +318,7 @@ public class Main {
             switch (menuCadastroMedico){
                 case 0:
                     // lista pacientes
+                    // evolução
                     ListaPacientes();// essa é a lista do enfermeiro
                     // chama paciente para consulta com base na lista do enfermeiro do paciente
                     break;

@@ -35,7 +35,7 @@ public final class FuncionarioDAO  {
         enfermeiro.setCargo(String.valueOf(Funcionario.CargosFuncionarios.ENFERMEIRO));
         enfermeiro.setSetor("Principal.Triagem");
         enfermeiro.setConselho("coren");
-        enfermeiro.setMatricula(23434);
+        enfermeiro.setMatricula(23);
         enfermeiro.setNome("Paula");
         enfermeiro.setCpf("777.872.247-30");
 

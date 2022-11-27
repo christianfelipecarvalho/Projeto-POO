@@ -3,15 +3,39 @@ package Principal;
 public class SinaisVitais {
 
     private Double temperatura;
-    private Double frequenciaCardiacos;
-    private Double pressao;
+    private Double frequenciaCardiaca;
+    private String pressao;
     private Double saturacao;
 
-    public Double getFrequenciaCardiacos() {
-        return frequenciaCardiacos;
+    public Double getFrequenciaCardiaca() {
+        return frequenciaCardiaca;
     }
 
-    public void setFrequenciaCardiacos(Double frequenciaCardiacos) {
-        this.frequenciaCardiacos = frequenciaCardiacos;
+    public Double getTemperatura() {
+        return temperatura;
+    }
+
+    public void setTemperatura(Double temperatura) {
+        this.temperatura = temperatura;
+    }
+
+    public String getPressao() {
+        return pressao;
+    }
+
+    public void setPressao(String pressao) {
+        this.pressao = pressao;
+    }
+
+    public Double getSaturacao() {
+        return saturacao;
+    }
+
+    public void setSaturacao(Double saturacao) {
+        this.saturacao = saturacao;
+    }
+
+    public void setFrequenciaCardiaca(Double frequenciaCardiaca) {
+        this.frequenciaCardiaca = frequenciaCardiaca;
     }
 }

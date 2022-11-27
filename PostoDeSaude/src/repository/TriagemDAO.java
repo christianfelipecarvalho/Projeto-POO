@@ -1,12 +1,9 @@
 package repository;
-
-import Principal.Paciente;
 import Principal.Triagem;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class TriagemDAO {
+public final class TriagemDAO {
     private static List<Triagem> triagens = new ArrayList<>();
 
     public static List<Triagem> findTriagem(){

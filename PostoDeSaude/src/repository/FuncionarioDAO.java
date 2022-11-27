@@ -47,6 +47,7 @@ public final class FuncionarioDAO  {
         medico.setConselho("crm");
         medico.setMatricula(3001);
         medico.setNome("João");
+        medico.setCrm(123);
         medico.setEspecialidades("Ortopedista");
         funcionarios.add(medico);
 

@@ -6,6 +6,15 @@ public class Consulta {
     private SinaisVitais sinaisVitais;
     private Triagem triagem;
     private Funcionario funcionario;
+    private String desfecho;
+
+    public String getDesfecho() {
+        return desfecho;
+    }
+
+    public void setDesfecho(String desfecho) {
+        this.desfecho = desfecho;
+    }
 
     public Paciente getPaciente() {
         return paciente;

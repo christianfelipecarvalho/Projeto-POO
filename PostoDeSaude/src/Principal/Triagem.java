@@ -61,7 +61,7 @@ public class Triagem extends SinaisVitais {
     @Override
     public String toString() {
         return "Triagem{" +
-                "paciente=" + paciente.getNome() +
+                "paciente=" + this.peso + " "+ this.altura+
                 '}';
     }
 

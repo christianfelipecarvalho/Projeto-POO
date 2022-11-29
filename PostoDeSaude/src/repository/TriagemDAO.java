@@ -10,9 +10,9 @@ public final class TriagemDAO {
         return triagens;
     }
 
-    public static void save(Triagem triagem){
+   /* public static void save(Triagem triagem){
         triagens.add(triagem);
-    }
+    }*/
 
     public static void save(List<Triagem> triagemList){
         triagens.addAll(triagemList);

@@ -44,9 +44,8 @@ public class Paciente extends Pessoa implements relatorios {
         List<String> dados = new ArrayList<>();
         List<Triagem> triagens = TriagemDAO.findTriagem();
         List<String> dadosTriagem = new ArrayList<>();
-        List<Consulta> consultas = ConsultaDAO.findTriagem();
+        List<Consulta> consultas = ConsultaDAO.findConsulta();
         List<String> dadosConsulta = new ArrayList<>();
-
 
         for (Triagem triagem: triagens ){
             dadosTriagem.add("\nPeso: "+triagem.getPeso() + "\nAltura: "+ triagem.getAltura()+ "\nClassificação: "+ triagem.getFilaDeEspera());

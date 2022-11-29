@@ -7,8 +7,10 @@ import repository.TriagemDAO;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 import static Principal.FilaDeEspera.*;
 import static java.lang.System.exit;
@@ -49,6 +51,8 @@ public class Main {
     public static void chamaCadastroPacientes() {
         List<Paciente> pacientes = new ArrayList<>();
         Paciente paciente = new Paciente();
+        List<Consulta> consultaList = new ArrayList<>();
+        Consulta consulta = new Consulta();
         pacientes.add(paciente);
         String[] opcaoMenuPaciente = {"DADOS BASICOS", "INFORMAÇÕES COMPLEMENTARES", "VOLTAR", "CANCELAR"};
         int menuCadastroPaciente = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
@@ -87,6 +91,7 @@ public class Main {
 
                 String cartaoSus = JOptionPane.showInputDialog("Escreva o CARTÃO DO SUS do paciente:");
                 paciente.setCartaoSus(cartaoSus);
+                consulta.setPaciente(paciente);
 
                 if (cartaoSus == null) {
                     JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
@@ -94,8 +99,11 @@ public class Main {
                     exit(0);
                 }
                 System.out.println(paciente.getCartaoSus());
+
                 pacientes.add(paciente);
                 PacienteDAO.save(paciente);
+                consultaList.add(consulta);
+                ConsultaDAO.save(consultaList);
                 System.out.println(PacienteDAO.findPacientes());
                 chamaCadastroPacientes();
                 break;
@@ -144,16 +152,33 @@ public class Main {
                 }
                 System.out.println(paciente.getTelefone());
 
-                String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente:");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                paciente.setDataNascimento(LocalDate.parse(dataNacimento, formatter));
+                try {
+                    String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente: ( DD/MM/AAAA)");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    paciente.setDataNascimento(LocalDate.parse(dataNacimento, formatter));
 
-                if (dataNacimento == null) {
-                    JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
-                            "AVISO",0);
-                    exit(0);
+                    if (dataNacimento == null) {
+                        JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                                "AVISO",0);
+                        exit(0);
+                    }
+                    System.out.println(paciente.getDataNascimento());
+                } catch (DateTimeParseException e ) {
+                    JOptionPane.showMessageDialog(null, "Formato Inválido!") ;
+
+                }finally {
+                    String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente: ( DD/MM/AAAA)");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    paciente.setDataNascimento(LocalDate.parse(dataNacimento, formatter));
+
+                    if (dataNacimento == null) {
+                        JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
+                                "AVISO",0);
+                        exit(0);
+                    }
+                    System.out.println(paciente.getDataNascimento());
                 }
-                System.out.println(paciente.getDataNascimento());
+
 //                triagens.add(triagem);
 //                TriagemDAO.save(triagem);
                 pacientes.add(paciente);
@@ -207,14 +232,16 @@ public class Main {
     }
     public static void listaPacientes(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
-//        List<Triagem> triagens = TriagemDAO.findTriagem(); quando for usar o for abaixo
+        //List<Consulta> consultaList = ConsultaDAO.findConsulta();
         List<String> nomePacientes = new ArrayList<>();
+//        for (Consulta consulta : consultaList){
+//          nomePacientes.add(consulta.getPaciente().getNome());
+//        }
+//        List<Triagem> triagens = TriagemDAO.findTriagem(); quando for usar o for abaixo
         for (Paciente paciente : pacientes){
                 System.out.println(paciente.getNome());
                 nomePacientes.add(paciente.getNome());
         }
-
-
         if(nomePacientes.size() == 0){
             JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 0);
             menuOpcaoSistemas();
@@ -226,6 +253,7 @@ public class Main {
             case 0:
                 JOptionPane.showMessageDialog(null, "Chamando paciente: "+ nomePacientes.get(0),
                     "AVISO",2);
+//                pacientes.remove(0);
                 nomePacientes.remove(0);
                 triagem();
                 break;
@@ -237,11 +265,9 @@ public class Main {
                         "AVISO",0);
                 exit(0);
         }
-
     }
     public static void triagem(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
-
         List<String> triagemList = new ArrayList<>();
 
 
@@ -276,27 +302,26 @@ public class Main {
             // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
 
             // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
-//            triagens.add(triagem);
             System.out.println("save 1 triagem"+ triagem);
             System.out.println("DAO 1"+ TriagemDAO.findTriagem());
             Object[] filaEspera = {triagem.filaDeEspera.NAOURGENTE, triagem.filaDeEspera.POUCOURGENTE, triagem.filaDeEspera.URGENTE, triagem.filaDeEspera.MUITOURGENTE};
-            int menuClassificação = JOptionPane.showOptionDialog(null, "CLASSIFIQUE O PACIENTE:",
+            int menuClassificacao = JOptionPane.showOptionDialog(null, "CLASSIFIQUE O PACIENTE:",
                     "MENU CLASSIFICAÇÃO",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, filaEspera, filaEspera[0]);
-            switch (menuClassificação) {
+            switch (menuClassificacao) {
                 case 0:
                     triagem.setFilaDeEspera(NAOURGENTE);
-                    String selecao = String.valueOf(JOptionPane.showConfirmDialog(null, "Paciente triado com sucesso!\nTempo de espera padrão até 120 minutos.\nDeseja chamar o proximo? ", "TRIAGEM", 1));
-                    if (selecao.equals(1) ){
+                    int selecao = JOptionPane.showConfirmDialog(null, "Paciente triado com sucesso!\nTempo de espera padrão até 120 minutos.\nDeseja chamar o proximo? ", "TRIAGEM", 1);
+                    System.out.println(selecao);
+                    if (selecao == 1) {
                         chamaMenuEnfermeiro();
                     }
-                    else if(selecao.equals(2)){
+                    else if(selecao == 2){
                         JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                                 "AVISO",0);
                         exit(0);
                     }
-//                    triagens.add(triagem);
-//                    TriagemDAO.save(triagens);
+
                     break;
                 case 1:
                     triagem.setFilaDeEspera(FilaDeEspera.POUCOURGENTE);

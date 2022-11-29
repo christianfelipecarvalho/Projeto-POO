@@ -20,11 +20,6 @@ public class Triagem extends SinaisVitais {
     private Double altura;
     FilaDeEspera filaDeEspera;
 
-//    public Triagem(Double peso, Double altura, FilaDeEspera filaDeEspera) {
-//        this.peso = peso;
-//        this.altura = altura;
-//        this.filaDeEspera = filaDeEspera;
-//    }
 
     public Paciente getPaciente() {
         return paciente;

@@ -108,52 +108,5 @@ public class Paciente extends Pessoa implements relatorios {
         }
         JOptionPane.showMessageDialog(null, "#######CLASSIFICAÇÃO######### "+ classificacaoList , "RELATÓRIO", 1);
         menuOpcaoSistemas();
-
-//        List<Paciente> pacientes = PacienteDAO.findPacientes();
-//        List<String> relatorio = new ArrayList<>();
-//        List<String> dados = new ArrayList<>();
-//        //Triagem triagem = new Triagem();
-//        List<Triagem> triagens = TriagemDAO.findTriagem();
-//        List<String> dadosTriagem = new ArrayList<>();
-//        List<Integer> posicoes = new ArrayList<>();
-//
-//        for (int i = 0; i <= pacientes.size() -1; i++ ){
-//            for (Triagem triagem: triagens ){
-//                if (triagem.getFilaDeEspera().equals(triagem.getFilaDeEspera().MUITOURGENTE)){
-//                    dadosTriagem.add("\nClassificação: "+ triagem.getFilaDeEspera());
-//                    posicoes.add(i) ;
-//                }
-//                else if(triagem.getFilaDeEspera().equals(triagem.getFilaDeEspera().URGENTE)) {
-//                    dadosTriagem.add("\nClassificação: "+ triagem.getFilaDeEspera());
-//                    posicoes.add(i);
-//                }
-//                else if(triagem.getFilaDeEspera().equals(triagem.getFilaDeEspera().POUCOURGENTE)){
-//                    dadosTriagem.add("\nClassificação: "+ triagem.getFilaDeEspera());
-//                    posicoes.add(i);
-//                }
-//                else if(triagem.getFilaDeEspera().equals(triagem.getFilaDeEspera().NAOURGENTE)){
-//                    dadosTriagem.add("\nClassificação: "+ triagem.getFilaDeEspera());
-//                    posicoes.add(i);
-//                }
-//            }
-//            for (Paciente paciente : pacientes){
-//                dados.add("\nCodigo: "+String.valueOf(paciente.getCodigo())+"\nAtendimento: "+ String.valueOf(paciente.getAtendimento())+
-//                        "\nNome: "+paciente.getNome());
-//            }
-//        }
-//        for (int i = 0; i <= pacientes.size() -1; i++){
-//            relatorio.add("\n#######DADOS DO PACIENTE####### " + dados.get(posicoes.get(i)) + "\n#######CLASSIFICAÇÃO#######" + dadosTriagem.get(posicoes.get(i)));
-//
-//        }
-//        JOptionPane.showMessageDialog(null, "#######RELATÓRIO######### "+ relatorio , "RELATÓRIO", 1);
-//        menuOpcaoSistemas();
-//
-//        if(relatorio.size() == 0){
-//            JOptionPane.showMessageDialog(null, "NENHUM PACIENTE NA FILA!", "AVISO", 0);
-//            menuOpcaoSistemas();
-//        }
-//        menuOpcaoSistemas();
-//    }
-
 }
 }

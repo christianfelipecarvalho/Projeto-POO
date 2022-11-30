@@ -17,12 +17,12 @@ import static java.lang.System.exit;
 
 public class Main {
     public static void main(String[] args) {
-//        try {
+        try {
             menuOpcaoSistemas();
-//        }catch (Exception e){
+        }catch (Exception e){
             JOptionPane.showMessageDialog(null,"Erro no sistema!\n Entre em contato com o suporte!!!",
                     "ERRO", 0);
-//        }
+        }
     }
 
     static Object menuOpcaoSistemas() {
@@ -51,8 +51,6 @@ public class Main {
     public static void chamaCadastroPacientes() {
         List<Paciente> pacientes = new ArrayList<>();
         Paciente paciente = new Paciente();
-        List<Consulta> consultaList = new ArrayList<>();
-        Consulta consulta = new Consulta();
         pacientes.add(paciente);
         String[] opcaoMenuPaciente = {"DADOS BASICOS", "INFORMAÇÕES COMPLEMENTARES", "VOLTAR", "CANCELAR"};
         int menuCadastroPaciente = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
@@ -88,11 +86,8 @@ public class Main {
                     exit(0);
                 }
                 System.out.println(paciente.getRg());
-
                 String cartaoSus = JOptionPane.showInputDialog("Escreva o CARTÃO DO SUS do paciente:");
                 paciente.setCartaoSus(cartaoSus);
-                consulta.setPaciente(paciente);
-
                 if (cartaoSus == null) {
                     JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                             "AVISO",0);
@@ -102,8 +97,6 @@ public class Main {
 
                 pacientes.add(paciente);
                 PacienteDAO.save(paciente);
-                consultaList.add(consulta);
-                ConsultaDAO.save(consultaList);
                 System.out.println(PacienteDAO.findPacientes());
                 chamaCadastroPacientes();
                 break;
@@ -178,9 +171,6 @@ public class Main {
                     }
                     System.out.println(paciente.getDataNascimento());
                 }
-
-//                triagens.add(triagem);
-//                TriagemDAO.save(triagem);
                 pacientes.add(paciente);
                 PacienteDAO.save(paciente);
                 menuOpcaoSistemas();
@@ -194,7 +184,6 @@ public class Main {
                 exit(0);
                 break;
         }
-//        TriagemDAO.save(triagem);
         PacienteDAO.save(pacientes);
 
     }
@@ -232,11 +221,7 @@ public class Main {
     }
     public static void listaPacientes(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
-        //List<Consulta> consultaList = ConsultaDAO.findConsulta();
         List<String> nomePacientes = new ArrayList<>();
-//        for (Consulta consulta : consultaList){
-//          nomePacientes.add(consulta.getPaciente().getNome());
-//        }
 //        List<Triagem> triagens = TriagemDAO.findTriagem(); quando for usar o for abaixo
         for (Paciente paciente : pacientes){
                 System.out.println(paciente.getNome());
@@ -253,7 +238,6 @@ public class Main {
             case 0:
                 JOptionPane.showMessageDialog(null, "Chamando paciente: "+ nomePacientes.get(0),
                     "AVISO",2);
-//                pacientes.remove(0);
                 nomePacientes.remove(0);
                 triagem();
                 break;
@@ -270,7 +254,6 @@ public class Main {
         List<Paciente> pacientes = PacienteDAO.findPacientes();
         List<String> triagemList = new ArrayList<>();
 
-
         for (Paciente paciente : pacientes){
             triagemList.add("\nCodigo: "+paciente.getCodigo()+"\nAtendimento: "+ paciente.getAtendimento() +"\nNome: "+paciente.getNome());
          }
@@ -280,25 +263,26 @@ public class Main {
             triagem.setPeso(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nInsira o peso do paciente: ", "TRIAGEM", 0)));
             triagem.setAltura(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
                     "\nInsira a altura do paciente: ", "TRIAGEM", 0)));
-            triagens.add(triagem);
-            System.out.println(triagemList);
-            System.out.println(triagem.getPeso() + " " + triagem.getAltura());
+
 
             // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
 
-//            triagem.setFrequenciaCardiaca(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
-//                    "\nAltura do paciente: "+ triagem.getAltura() + "\n Insira a frequencia cardiaca: ", "TRIAGEM", 0)));
-//
-//            triagem.setSaturacao(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
-//                    "\nAltura do paciente: "+ triagem.getAltura()+"\nFrequencia cardiaca: "+ triagem.getFrequenciaCardiaca() + "\n Insira a saturação: ", "TRIAGEM", 0)));
-//
-//            triagem.setPressao(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
-//                    "\nAltura do paciente: "+ triagem.getAltura()+"\nFrequencia cardiaca: "+ triagem.getFrequenciaCardiaca() + "\nSaturação: "
-//                    + triagem.getSaturacao()+"\nInsira a pressao: ", "TRIAGEM", 0));
-//
-//            triagem.setTemperatura(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
-//                    "\nAltura do paciente: "+ triagem.getAltura()+"\nFrequencia cardiaca: "+ triagem.getFrequenciaCardiaca() + "\nSaturação: "+ triagem.getSaturacao()+
-//                    "\nPressao: " + triagem.getPressao()+"\nInsira a temperatura: ", "TRIAGEM", 0)));
+            triagem.setFrequenciaCardiaca(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
+                    "\nAltura do paciente: "+ triagem.getAltura() + "\n Insira a frequencia cardiaca: ", "TRIAGEM", 0)));
+
+            triagem.setSaturacao(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
+                    "\nAltura do paciente: "+ triagem.getAltura()+"\nFrequencia cardiaca: "+ triagem.getFrequenciaCardiaca() + "\n Insira a saturação: ", "TRIAGEM", 0)));
+
+            triagem.setPressao(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
+                    "\nAltura do paciente: "+ triagem.getAltura()+"\nFrequencia cardiaca: "+ triagem.getFrequenciaCardiaca() + "\nSaturação: "
+                    + triagem.getSaturacao()+"\nInsira a pressao: ", "TRIAGEM", 0));
+
+            triagem.setTemperatura(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
+                    "\nAltura do paciente: "+ triagem.getAltura()+"\nFrequencia cardiaca: "+ triagem.getFrequenciaCardiaca() + "\nSaturação: "+ triagem.getSaturacao()+
+                    "\nPressao: " + triagem.getPressao()+"\nInsira a temperatura: ", "TRIAGEM", 0)));
+            triagens.add(triagem);
+            System.out.println(triagemList);
+            System.out.println(triagem.getPeso() + " " + triagem.getAltura());
             // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
 
             // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
@@ -484,19 +468,34 @@ public class Main {
         List<Triagem> triagens = TriagemDAO.findTriagem();
         List<String> classificacao = new ArrayList<>();
         for (int i =0; i <= pacientes.size() -1; i++){
-            if (triagens.get(i).getFilaDeEspera().equals(NAOURGENTE)){
+            if (triagens.get(i).getFilaDeEspera().equals(MUITOURGENTE)){
                 classificacao.add("\nPeso" + triagens.get(i).getPeso()+ "\nAltura: " +triagens.get(i).getAltura()+
                         "Classificação: "+triagens.get(i).getFilaDeEspera());
                 nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
                         + (pacientes.get(i).getAtendimento())+
                         "\nNome: "+pacientes.get(i).getNome()+"\nCPF: "+pacientes.get(i).getCpf());
-            } if (triagens.get(i).getFilaDeEspera().equals(POUCOURGENTE)) {
+            } if (triagens.get(i).getFilaDeEspera().equals(URGENTE)) {
                 classificacao.add("\nPeso" + triagens.get(i).getPeso()+ "\nAltura: " +triagens.get(i).getAltura()+
                         "Classificação: "+triagens.get(i).getFilaDeEspera());
                 nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
                         + (pacientes.get(i).getAtendimento())+
                         "\nNome: "+pacientes.get(i).getNome());
             }
+            if (triagens.get(i).getFilaDeEspera().equals(POUCOURGENTE)) {
+                classificacao.add("\nPeso" + triagens.get(i).getPeso()+ "\nAltura: " +triagens.get(i).getAltura()+
+                        "Classificação: "+triagens.get(i).getFilaDeEspera());
+                nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
+                        + (pacientes.get(i).getAtendimento())+
+                        "\nNome: "+pacientes.get(i).getNome());
+            }
+            if (triagens.get(i).getFilaDeEspera().equals(NAOURGENTE)) {
+                classificacao.add("\nPeso" + triagens.get(i).getPeso()+ "\nAltura: " +triagens.get(i).getAltura()+
+                        "Classificação: "+triagens.get(i).getFilaDeEspera());
+                nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
+                        + (pacientes.get(i).getAtendimento())+
+                        "\nNome: "+pacientes.get(i).getNome());
+            }
+
 
         }
         for (int i = 0; i <= pacientes.size() -1; i++) {

@@ -1,7 +1,7 @@
 package repository;
 
-import Principal.Funcionario;
-import Principal.Medico;
+import model.Funcionario;
+import model.Medico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,6 @@ public final class FuncionarioDAO  {
     }
 
     public static List<Funcionario> findFuncionarios(Funcionario.CargosFuncionarios cargo) {
-
         List<Funcionario> funcionariosByCargo = new ArrayList<>();
         for (Funcionario funcionario : findFuncionarios()) {
             if(funcionario.getCargo().equals(cargo.toString())){
@@ -64,7 +63,6 @@ public final class FuncionarioDAO  {
         }
 
         List<String> cargos = new ArrayList<>();
-
         for (Funcionario funcionario : FuncionarioDAO.findFuncionarios()) {
             cargos.add(funcionario.getCargo());
         }
@@ -72,7 +70,6 @@ public final class FuncionarioDAO  {
         for (Funcionario funcionarioMatricula : FuncionarioDAO.findFuncionarios()) {
             matriculaGeral.add(String.valueOf(funcionarioMatricula.getMatricula()));
         }
-
         return funcionariosByCargo;
     }
 }

@@ -1,17 +1,15 @@
-package Principal;
+package model;
 
-import Interface.relatorios;
+import interfaces.relatorios;
 import repository.ConsultaDAO;
 import repository.PacienteDAO;
 import repository.TriagemDAO;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static Principal.FilaDeEspera.*;
-import static Principal.Main.menuOpcaoSistemas;
+import static model.FilaDeEspera.*;
+import static model.Main.menuOpcaoSistemas;
 
 public class Paciente extends Pessoa implements relatorios {
     private String cartaoSus;
@@ -55,11 +53,9 @@ public class Paciente extends Pessoa implements relatorios {
             dados.add("\nCodigo: "+String.valueOf(paciente.getCodigo())+"\nAtendimento: "+ String.valueOf(paciente.getAtendimento())+
                     "\nNome: "+paciente.getNome()+"\nCPF: "+paciente.getCpf());
         }
-//        if (consultas.get(0)!=null){
         for (Consulta consulta: consultas){
             dadosConsulta.add("\n Evolução: " + consulta.getDesfecho());
         }
-//        }
         for (int i = 0; i <= pacientes.size() - 1; i++){
             relatorio.add("\n#######DADOS DO PACIENTE####### "+ dados.get(i)+"\n#######DADOS DA TRIAGEM####### " + dadosTriagem.get(i)+
                     "\n#######DESFECHO#######" + dadosConsulta.get(i));
@@ -108,5 +104,5 @@ public class Paciente extends Pessoa implements relatorios {
         }
         JOptionPane.showMessageDialog(null, "#######CLASSIFICAÇÃO######### "+ classificacaoList , "RELATÓRIO", 1);
         menuOpcaoSistemas();
-}
+    }
 }

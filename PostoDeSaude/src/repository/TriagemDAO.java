@@ -1,5 +1,5 @@
 package repository;
-import Principal.Triagem;
+import model.Triagem;
 import java.util.ArrayList;
 import java.util.List;
 

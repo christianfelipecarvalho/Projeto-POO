@@ -1,8 +1,4 @@
-package Principal;
-
-import Interface.relatorios;
-
-import java.util.List;
+package model;
 
 public class Funcionario extends Pessoa  {
     private String cargo;
@@ -11,11 +7,7 @@ public class Funcionario extends Pessoa  {
     private Integer matricula;
     private String conselho;
 
-//    @Override
-//    public List<relatorios> relatorioGeral() {
-//    return relatorios;
-//    }
-//
+
 
     public  enum CargosFuncionarios{
         RECEPCIONISTA,

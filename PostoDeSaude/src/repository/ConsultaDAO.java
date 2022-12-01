@@ -1,6 +1,6 @@
 package repository;
 
-import Principal.Consulta;
+import model.Consulta;
 
 import java.util.ArrayList;
 import java.util.List;

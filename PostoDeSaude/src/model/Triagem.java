@@ -1,17 +1,4 @@
-package Principal;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import Interface.relatorios;
-import repository.PacienteDAO;
-import repository.TriagemDAO;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+package model;
 
 
 public class Triagem extends SinaisVitais {

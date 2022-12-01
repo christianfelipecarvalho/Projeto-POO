@@ -1,4 +1,4 @@
-package Principal;
+package model;
 
 public class Medico extends Funcionario{
     private String especialidades;

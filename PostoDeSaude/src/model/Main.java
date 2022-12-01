@@ -1,4 +1,4 @@
-package Principal;
+package model;
 
 import repository.ConsultaDAO;
 import repository.FuncionarioDAO;
@@ -10,9 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.DataFormatException;
-
-import static Principal.FilaDeEspera.*;
+import static model.FilaDeEspera.*;
 import static java.lang.System.exit;
 
 public class Main {
@@ -38,7 +36,6 @@ public class Main {
             chamaMenuEnfermeiro();
         }
         else if(selecionado ==Funcionario.CargosFuncionarios.MEDICO){
-            // CHAMAR MEDICO
             chamaMenuMedico();
         }
         else if(selecionado == null){
@@ -62,11 +59,14 @@ public class Main {
                 paciente.setAtendimento(0);
                 String nome = JOptionPane.showInputDialog("Escreva o NOME do paciente: ");
                 paciente.setNome(nome);
-                System.out.println(paciente.getNome());
                 if (nome == null) {
                     JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                             "AVISO",0);
                     exit(0);
+                }
+                if (nome.equals("")){
+                    JOptionPane.showMessageDialog(null, "NÃO FOI CADASTRADO NENHUM NOME!",
+                            "AVISO",0);
                 }
 
                 String cpf = JOptionPane.showInputDialog("Escreva o CPF do paciente:");
@@ -76,16 +76,21 @@ public class Main {
                             "AVISO",0);
                     exit(0);
                 }
-                System.out.println(paciente.getCpf());
+                if (cpf.equals("")){
+                    JOptionPane.showMessageDialog(null, "NÃO FOI CADASTRADO NENHUM CPF!",
+                            "AVISO",0);
+                }
                 String rg = JOptionPane.showInputDialog("Escreva o RG do paciente:");
                 paciente.setRg(rg);
-
                 if (rg== null) {
                     JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                             "AVISO",0);
                     exit(0);
                 }
-                System.out.println(paciente.getRg());
+                if (rg.equals("")){
+                    JOptionPane.showMessageDialog(null, "NÃO FOI CADASTRADO NENHUM RG!",
+                            "AVISO",0);
+                }
                 String cartaoSus = JOptionPane.showInputDialog("Escreva o CARTÃO DO SUS do paciente:");
                 paciente.setCartaoSus(cartaoSus);
                 if (cartaoSus == null) {
@@ -93,17 +98,17 @@ public class Main {
                             "AVISO",0);
                     exit(0);
                 }
-                System.out.println(paciente.getCartaoSus());
-
+                if (cartaoSus.equals("")){
+                    JOptionPane.showMessageDialog(null, "NÃO FOI CADASTRADO NENHUM CARTÃO DO SUS!",
+                            "AVISO",0);
+                }
                 pacientes.add(paciente);
                 PacienteDAO.save(paciente);
-                System.out.println(PacienteDAO.findPacientes());
                 chamaCadastroPacientes();
                 break;
             case 1:
                 String pais = JOptionPane.showInputDialog("Escreva o PAIS do paciente:");
                 paciente.setPais(pais);
-                System.out.println(paciente.getPais());
                 if (pais == null) {
                     JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                             "AVISO",0);
@@ -116,13 +121,16 @@ public class Main {
                             "AVISO",0);
                     exit(0);
                 }
-                System.out.println(paciente.getUf());
                 String bairro = JOptionPane.showInputDialog("Escreva o BAIRRO do paciente:");
                 paciente.setBairro(bairro);
                 if (bairro == null) {
                     JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                             "AVISO",0);
                     exit(0);
+                }
+                if (bairro.equals("")){
+                    JOptionPane.showMessageDialog(null, "NÃO FOI CADASTRADO NENHUM BAIRRO!",
+                            "AVISO",0);
                 }
                 System.out.println(paciente.getBairro());
 
@@ -134,7 +142,10 @@ public class Main {
                             "AVISO",0);
                     exit(0);
                 }
-                System.out.println(paciente.getRua());
+                if (rua.equals("")){
+                    JOptionPane.showMessageDialog(null, "NÃO FOI CADASTRADO NENHUMA RUA!",
+                            "AVISO",0);
+                }
 
                 String telefone = JOptionPane.showInputDialog("Escreva o TELEFONE do paciente:");
                 paciente.setTelefone(telefone);
@@ -143,7 +154,10 @@ public class Main {
                             "AVISO",0);
                     exit(0);
                 }
-                System.out.println(paciente.getTelefone());
+                if (telefone.equals("")){
+                    JOptionPane.showMessageDialog(null, "NÃO FOI CADASTRADO NENHUM TELEFONE!",
+                            "AVISO",0);
+                }
 
                 try {
                     String dataNacimento = JOptionPane.showInputDialog("Escreva a DATA DE NASCIMENTO do paciente: ( DD/MM/AAAA)");
@@ -169,10 +183,8 @@ public class Main {
                                 "AVISO",0);
                         exit(0);
                     }
-                    System.out.println(paciente.getDataNascimento());
                 }
                 pacientes.add(paciente);
-                PacienteDAO.save(paciente);
                 menuOpcaoSistemas();
                 break;
             case 2:
@@ -185,7 +197,6 @@ public class Main {
                 break;
         }
         PacienteDAO.save(pacientes);
-
     }
     private static void chamaRecepcionista() {
         List<Integer> matriculaFuncionrio = new ArrayList<>();
@@ -211,7 +222,6 @@ public class Main {
         if (confirmacaoCadastroPaciente == 0) {
             chamaCadastroPacientes();
         } else if (confirmacaoCadastroPaciente == 1) {
-            // retornar ao menu de opções
             menuOpcaoSistemas();
         } else if (confirmacaoCadastroPaciente == 2) {
             JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
@@ -222,7 +232,6 @@ public class Main {
     public static void listaPacientes(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
         List<String> nomePacientes = new ArrayList<>();
-//        List<Triagem> triagens = TriagemDAO.findTriagem(); quando for usar o for abaixo
         for (Paciente paciente : pacientes){
                 System.out.println(paciente.getNome());
                 nomePacientes.add(paciente.getNome());
@@ -231,8 +240,8 @@ public class Main {
             JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 0);
             menuOpcaoSistemas();
         }
-            JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
-           int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "
+        JOptionPane.showMessageDialog(null, "PROXIMOS PACIENTES: \n"+nomePacientes);
+        int chamandoPaciente = JOptionPane.showConfirmDialog(null, "Deseja chamar o paciente "
                 +nomePacientes.get(0)+" para triagem?");
         switch (chamandoPaciente){
             case 0:
@@ -257,15 +266,13 @@ public class Main {
         for (Paciente paciente : pacientes){
             triagemList.add("\nCodigo: "+paciente.getCodigo()+"\nAtendimento: "+ paciente.getAtendimento() +"\nNome: "+paciente.getNome());
          }
+
         for(int i = 0; i <= pacientes.size() - 1;i++) {
             Triagem triagem = new Triagem();
             List<Triagem> triagens = new ArrayList<>();
             triagem.setPeso(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nInsira o peso do paciente: ", "TRIAGEM", 0)));
             triagem.setAltura(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
                     "\nInsira a altura do paciente: ", "TRIAGEM", 0)));
-
-
-            // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
 
             triagem.setFrequenciaCardiaca(Double.valueOf(JOptionPane.showInputDialog(null, "PACIENTE: " + triagemList.get(i) + "\nPeso do paciente: " + triagem.getPeso() +
                     "\nAltura do paciente: "+ triagem.getAltura() + "\n Insira a frequencia cardiaca: ", "TRIAGEM", 0)));
@@ -281,22 +288,15 @@ public class Main {
                     "\nAltura do paciente: "+ triagem.getAltura()+"\nFrequencia cardiaca: "+ triagem.getFrequenciaCardiaca() + "\nSaturação: "+ triagem.getSaturacao()+
                     "\nPressao: " + triagem.getPressao()+"\nInsira a temperatura: ", "TRIAGEM", 0)));
             triagens.add(triagem);
-            System.out.println(triagemList);
-            System.out.println(triagem.getPeso() + " " + triagem.getAltura());
-            // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
-
-            // NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR NÃO APAGAR
             System.out.println("save 1 triagem"+ triagem);
             System.out.println("DAO 1"+ TriagemDAO.findTriagem());
-            Object[] filaEspera = {triagem.filaDeEspera.NAOURGENTE, triagem.filaDeEspera.POUCOURGENTE, triagem.filaDeEspera.URGENTE, triagem.filaDeEspera.MUITOURGENTE};
+            Object[] filaEspera = {"NÃO URGENTE","POUCO URGENTE", "URGENTE", "MUITO URGENTE!"};
             int menuClassificacao = JOptionPane.showOptionDialog(null, "CLASSIFIQUE O PACIENTE:",
-                    "MENU CLASSIFICAÇÃO",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, filaEspera, filaEspera[0]);
+                    "MENU CLASSIFICAÇÃO", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, filaEspera, filaEspera[0]);
             switch (menuClassificacao) {
                 case 0:
                     triagem.setFilaDeEspera(NAOURGENTE);
                     int selecao = JOptionPane.showConfirmDialog(null, "Paciente triado com sucesso!\nTempo de espera padrão até 120 minutos.\nDeseja chamar o proximo? ", "TRIAGEM", 1);
-                    System.out.println(selecao);
                     if (selecao == 1) {
                         chamaMenuEnfermeiro();
                     }
@@ -305,7 +305,6 @@ public class Main {
                                 "AVISO",0);
                         exit(0);
                     }
-
                     break;
                 case 1:
                     triagem.setFilaDeEspera(FilaDeEspera.POUCOURGENTE);
@@ -319,8 +318,6 @@ public class Main {
                                 "AVISO",0);
                         exit(0);
                     }
-//                    triagens.add(triagem);
-//                    TriagemDAO.save(triagens);
                     break;
                 case 2:
                     triagem.setFilaDeEspera(URGENTE);
@@ -333,12 +330,9 @@ public class Main {
                                 "AVISO",0);
                         exit(0);
                     }
-//                    triagens.add(triagem);
-//                    TriagemDAO.save(triagens);
                     break;
                 case 3:
                     triagem.setFilaDeEspera(FilaDeEspera.MUITOURGENTE);
-
                     JOptionPane.showMessageDialog(null, "PACIENTE NECESSITA DE ATENDIMENTO IMEDIATO LEVE ATÉ O CONSULTÓRIO. ", "TRIAGEM", 0);
                     int selecao3 =JOptionPane.showConfirmDialog(null, "Deseja chamar o proximo? ", "TRIAGEM", 1);
                     if (selecao3 == 1){
@@ -349,16 +343,12 @@ public class Main {
                                 "AVISO",0);
                         exit(0);
                     }
-//                    triagens.add(triagem);
-//                    TriagemDAO.save(triagens);
                     break;
             }
             System.out.println("list triagens " + triagens);
             System.out.println("DAO 2"+TriagemDAO.findTriagem());
             TriagemDAO.save(triagens);
         }
-
-            System.out.println(TriagemDAO.findTriagem());
             menuOpcaoSistemas();
             JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA TRIAGEM!", "AVISO", 3);
             chamaMenuEnfermeiro();}
@@ -367,7 +357,6 @@ public class Main {
         for (Funcionario funcionario : FuncionarioDAO.findFuncionarios(Funcionario.CargosFuncionarios.ENFERMEIRO)) {
             matriculaFuncionario.add(funcionario.getMatricula());
         }
-        // mostrarListapaciente(), mostrarClassificacao(), triagem()
         String verificaSenha = JOptionPane.showInputDialog(null, "Digite a senha: ","MENU ENFERMEIRO",3);
         if (verificaSenha == null) {
             JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
@@ -381,23 +370,15 @@ public class Main {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuEnfermeiro, opcaoMenuEnfermeiro[0]);
         switch (menuCadastroEnfermeiro){
             case 0:
-                // lista pacientes
                 listaPacientes();
-                //triagem();
-                // chama triagem do paciente
             break;
             case 1:
-                // MOSTRA A CLASSIFICACAO
                 Paciente paciente1 = new Paciente();
                 paciente1.mostraClassificacao();
-                // mostra classificacao pensar em algo melhor
                 break;
             case 2:
-                // relatorios
                 Paciente paciente = new Paciente();
                 paciente.relatorioGeral();
-
-                //chamaRelatorioGeral();
                 break;
             case 3:
                 menuOpcaoSistemas();
@@ -407,7 +388,6 @@ public class Main {
                         "AVISO",0);
                 exit(0);
                 break;
-
             default:
                 JOptionPane.showMessageDialog(null, "PROGRAMA CANCELADO PELO USUÁRIO!",
                         "AVISO",0);
@@ -436,13 +416,7 @@ public class Main {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcaoMenuMedico, opcaoMenuMedico[0]);
             switch (menuCadastroMedico){
                 case 0:
-                    // lista pacientes
-                    // evolução
-//                    Paciente paciente = new Paciente();
-//                    paciente.mostraClassificacao();
                     consulta();
-                    // essa é a lista do enfermeiro
-                    // chama paciente para consulta com base na lista do enfermeiro do paciente
                     break;
                 case 1:
                     menuOpcaoSistemas();
@@ -462,7 +436,7 @@ public class Main {
             chamaMenuMedico();
         }
     }
-    public static void consulta(){ /// MUDAR PARA CONSULTA OU EVOLUÇÃO
+    public static void consulta(){
         List<Paciente> pacientes = PacienteDAO.findPacientes();
         List<String> nomePacientes = new ArrayList<>();
         List<Triagem> triagens = TriagemDAO.findTriagem();
@@ -474,29 +448,27 @@ public class Main {
                 nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
                         + (pacientes.get(i).getAtendimento())+
                         "\nNome: "+pacientes.get(i).getNome()+"\nCPF: "+pacientes.get(i).getCpf());
-            } if (triagens.get(i).getFilaDeEspera().equals(URGENTE)) {
+            } else if (triagens.get(i).getFilaDeEspera().equals(URGENTE)) {
                 classificacao.add("\nPeso" + triagens.get(i).getPeso()+ "\nAltura: " +triagens.get(i).getAltura()+
                         "Classificação: "+triagens.get(i).getFilaDeEspera());
                 nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
                         + (pacientes.get(i).getAtendimento())+
                         "\nNome: "+pacientes.get(i).getNome());
             }
-            if (triagens.get(i).getFilaDeEspera().equals(POUCOURGENTE)) {
+            else if (triagens.get(i).getFilaDeEspera().equals(POUCOURGENTE)) {
                 classificacao.add("\nPeso" + triagens.get(i).getPeso()+ "\nAltura: " +triagens.get(i).getAltura()+
                         "Classificação: "+triagens.get(i).getFilaDeEspera());
                 nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
                         + (pacientes.get(i).getAtendimento())+
                         "\nNome: "+pacientes.get(i).getNome());
             }
-            if (triagens.get(i).getFilaDeEspera().equals(NAOURGENTE)) {
+            else if (triagens.get(i).getFilaDeEspera().equals(NAOURGENTE)) {
                 classificacao.add("\nPeso" + triagens.get(i).getPeso()+ "\nAltura: " +triagens.get(i).getAltura()+
                         "Classificação: "+triagens.get(i).getFilaDeEspera());
                 nomePacientes.add("\nCodigo: "+ (pacientes.get(i).getCodigo())+"\nAtendimento: "
                         + (pacientes.get(i).getAtendimento())+
                         "\nNome: "+pacientes.get(i).getNome());
             }
-
-
         }
         for (int i = 0; i <= pacientes.size() -1; i++) {
             List<Consulta> consultas = new ArrayList<>();
@@ -506,13 +478,11 @@ public class Main {
                 consultas.add(consulta);
                 ConsultaDAO.save(consultas);
         }
-
         menuOpcaoSistemas();
         if(nomePacientes.size() == 0){
             JOptionPane.showMessageDialog(null, "NENHUM PACIENTE PARA CONSULTA!", "AVISO", 0);
             menuOpcaoSistemas();
         }
-
     }
 }
 

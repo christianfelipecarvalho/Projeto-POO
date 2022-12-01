@@ -1,4 +1,4 @@
-package Principal;
+package model;
 
 public class Consulta {
     private Paciente paciente;
